@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+body,
+button {
+  font-family: "Roboto", sans-serif;
+}
+
+/*
+.topbar {
+  background-color: var(--bs-primary);
+}
+
+.topbar .logo a{
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+}
+
+.topbar .toggle {
+  text-align: right;
+}
+
+.topbar .toggle a{
+  color: #fff;
+  font-size: 2em;
+  display: inline-block;
+}*/
+
+:root {
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 62px;
+}
+
+.sidebar-nav {
+  width: var(--offcanvas-width);
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+}
+.sidebar-link .right-icon {
+  display: inline-flex;
+}
+.sidebar-link[aria-expanded="true"] .right-icon {
+  transform: rotate(180deg);
+}
+.btn-primary-outline {
+  background-color: #fff;
+  border-color: #ced4da;
+  border-left: #fff;
+}
+@media (min-width: 992px) {
+  body {
+    overflow: auto !important;
+  }
+  main {
+    margin-left: var(--offcanvas-width);
+  }
+  .offcanvas-backdrop::before {
+    display: none;
+  }
+  .sidebar-nav {
+    -webkit-transform: none;
+    transform: none;
+    visibility: visible !important;
+    height: calc(100% - var(--topNavbarHeight));
+    top: var(--topNavbarHeight);
+  }
+}
+
+.sidebar-nav .active{
+  background-color: #f9e0c6;
+  text-decoration: none;
+  color: #71655a !important;
+}
+
+.color1 {
+  background-color: #00C292;
+}
+
+.color2 {
+  background-color: #03A9F3;
+}
+
+.color3 {
+  background-color: #FB7146;
+}
+
+.dashboard-card {
+  display: inline-block;
+  font-family: "Roboto", sans-serif;
+  margin: 10px;
+  padding: 20px;
+  width: 275px;
+  height: 150px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.dashboard-card:hover {
+  transition: all 0.2s ease-in-out;
+  filter: brightness(85%);
+}
+
+.dashboard-card h3 {
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.count {
+  font-size: 30px;
+  font-weight: 500px;
+}
+
+.dashboard-card p {
+  font-size: 16px;
+  margin-top: 0px;
+}
+
+.dashboard-card i {
+  font-size: 95px;
+  opacity: 0.5;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+#mainNav {
+  background-color: #061f39 !important;
+}
+
+#sidebar {
+  background-color: #061f39 !important;
+}

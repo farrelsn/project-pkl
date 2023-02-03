@@ -1,0 +1,22 @@
+:root {
+    --bs-offcanvas-width: 250px;
+}
+
+.offcanvas.offcanvas-start.sidebar-nav {
+    width: 250px;
+}
+
+@media (min-width: 992px) {
+    body{
+        overflow: auto !important;
+    }
+    /* .offcanvas.offcanvas-backdrop::before {
+        display: none !important;
+    } */
+    .offcanvas.offcanvas-start.sidebar-nav {
+        transform: none;
+        visibility: visible !important;
+        top: 56px;
+        height: calc(100% - 56px);
+    }
+}
