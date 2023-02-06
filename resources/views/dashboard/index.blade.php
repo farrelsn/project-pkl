@@ -62,6 +62,19 @@
       </a>
     </div>
     <div class="dashboard-card color4">
+      <a href="{{ route('pegawai_admin') }}">
+        <div class="float-left">
+          <h3>
+            <span class="count">{{ $pegawai->count() }}</span>
+          </h3>
+          <p>Pegawai</p>
+        </div>
+        <div class="float-right">
+          <i class="bi bi-person-vcard-fill"></i>
+        </div>
+      </a>
+    </div>
+    <div class="dashboard-card color5">
       <a href="{{ route('lokasi_admin') }}">
       
         <div class="float-left">
@@ -103,11 +116,23 @@
       </a>
     </div>
     <div class="dashboard-card color4">
+      <a href="{{ route('pegawai_user') }}">
+        <div class="float-left">
+          <h3>
+            <span class="count">{{ $pegawai->count() }}</span>
+          </h3>
+          <p>Pegawai</p>
+        </div>
+        <div class="float-right">
+          <i class="bi bi-person-vcard-fill"></i>
+        </div>
+      </a>
+    </div>
+    <div class="dashboard-card color5">
       <a href="{{ route('lokasi_user') }}">
       
         <div class="float-left">
           <h3>
-            {{-- <span class="currency">$</span> --}}
             <span class="count">{{ $lokasi->count() }}</span>
           </h3>
           <p>Lokasi</p>
@@ -117,5 +142,6 @@
         </div>
       </a>
     </div>
+
   @endif
 @endsection

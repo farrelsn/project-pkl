@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="lantai" class="col-form-label">Kategori Barang</label>
+                                  <label for="lantai" class="col-form-label">Lantai</label>
                                   <select class="form-select" name="lantai" id="lantai">
                                     <option value="">Pilih Lantai....</option>
                                     <option value="1">Lantai 1</option>
