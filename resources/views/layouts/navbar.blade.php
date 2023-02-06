@@ -64,7 +64,7 @@
                 <a href="{{ route('ganti_password') }}" class="dropdown-item bg-danger-soft-hover"><i class="fa-solid fa-key me-2"></i>Ganti Password</a>
               </li>
               <li>
-                <form method="POST" action="/logout">
+                <form method="POST" action="{{ route('logout') }}">
                   @csrf
                   <button class="dropdown-item bg-danger-soft-hover"><i class="fa-solid fa-power-off me-2"></i>Log Out</button>
                 </form>
