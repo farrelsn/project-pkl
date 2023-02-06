@@ -23,13 +23,15 @@ class LaporanBarangMasukController extends Controller
         $barang = tb_barang::all();
         $kategori_barang = tb_kategori_barang::all();
         $tgl = date('Y-m-d');
+        $tgl_awal = null;
+        $tgl_akhir = null;  
         if(Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
-            return view('user.laporan_barang_masuk.index', ['title' => 'Laporan Barang Masuk', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'tgl' => $tgl, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
+            return view('user.laporan_barang_masuk.index', ['title' => 'Laporan Pemasukan Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'tgl' => $tgl, 'barang' => $barang, 'barang_masuk' => $barang_masuk, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir]);
         }
         else if(Auth::user()->level == 'admin'){
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('admin.laporan_barang_masuk.index', ['title' => 'Laporan Barang Masuk', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'tgl' => $tgl, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
+            return view('admin.laporan_barang_masuk.index', ['title' => 'Laporan Pemasukan Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'tgl' => $tgl, 'barang' => $barang, 'barang_masuk' => $barang_masuk, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir]);
         }
     }
 
@@ -102,17 +104,18 @@ class LaporanBarangMasukController extends Controller
     public function filter(Request $request){
         $tgl_awal = $request->tanggal_awal;
         $tgl_akhir = $request->tanggal_akhir;
+        //dd($tgl_awal, $tgl_akhir);
         $barang = tb_barang::all();
         $kategori_barang = tb_kategori_barang::all();
         $barang_masuk = tb_barang_masuk::whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])->get();
         //dd($tgl_awal, $tgl_akhir, $barang_masuk);
         if(Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
-            return view('user.laporan_barang_masuk.index', ['title' => 'Laporan Barang Masuk', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
+            return view('user.laporan_barang_masuk.index', ['title' => 'Laporan Pemasukan Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
         }
         else if(Auth::user()->level == 'admin'){
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('admin.laporan_barang_masuk.index', ['title' => 'Laporan Barang Masuk', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
+            return view('admin.laporan_barang_masuk.index', ['title' => 'Laporan Pemasukan Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'barang' => $barang, 'barang_masuk' => $barang_masuk]);
         }
     }
 }

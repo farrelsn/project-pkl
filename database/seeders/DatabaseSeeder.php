@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TbKategoriBarangSeeder::class,
             TbBarangSeeder::class,
+            TbLokasiSeeder::class,
+            TbJabatanSeeder::class,
         ]);
     }
 }

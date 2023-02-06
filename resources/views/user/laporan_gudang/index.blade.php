@@ -35,7 +35,7 @@
                     <th>No.</th>
                     <th>Nama Alat</th>
                     {{-- <th>Stok Akhir</th> --}}
-                    <th>Stok Awal</th>
+                    <th>Stok</th>
                     {{-- <th>Aksi</th> --}}
                   </tr>
                 </thead>

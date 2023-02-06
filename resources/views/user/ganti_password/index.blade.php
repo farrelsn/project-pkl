@@ -24,7 +24,7 @@
         </button>
     </div>
     @endif
-    <h5>{{ $title }}</h5>
+    <h3>{{ $title }}</h3>
     <div class="card">
         <div class="card-body">
             <form method="POST" class="row g-3" action="{{ route('ganti_password.update') }}" enctype="multipart/form-data">

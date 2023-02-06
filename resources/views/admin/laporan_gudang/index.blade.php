@@ -25,7 +25,7 @@
     </div>
     @endif
       <h3>{{ $title }}</h3>
-      @if ($alat_kerja->count() > 0)
+      @if ($barang->count() > 0)
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -35,20 +35,20 @@
                     <th>No.</th>
                     <th>Nama Alat</th>
                     {{-- <th>Stok Akhir</th> --}}
-                    <th>Stok Awal</th>
+                    <th>Stok</th>
                     {{-- <th>Aksi</th> --}}
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($alat_kerja as $item)
+                  @foreach ($barang as $item)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_alat_kerja }}</td>
-                    {{-- <td>{{ $item->jenis_alat_kerja }}</td> --}}
+                    <td>{{ $item->nama_barang }}</td>
+                    {{-- <td>{{ $item->kategori_barang }}</td> --}}
                     <td>{{ $item->stok }}</td>
                     {{-- <td class="text-center">
-                      <a class="btn btn-dark" href="{{ route('data_alat_kerja_user.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a>
-                      <a class="btn btn-danger" href="{{ route('data_alat_kerja_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td> --}}
+                      <a class="btn btn-dark" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a>
+                      <a class="btn btn-danger" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td> --}}
                   </tr>
                   @endforeach
                 </tbody>

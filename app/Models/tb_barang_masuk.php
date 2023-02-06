@@ -18,6 +18,18 @@ class tb_barang_masuk extends Model
         'jumlah_barang',
         'stok_akhir',
         'tanggal_masuk',
-        'keterangan',
+        //'keterangan',
     ];
+
+    public function barang()
+    {
+        return $this->belongsTo(tb_barang::class, 'nama_barang', 'id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
+    }
+
+    
 }

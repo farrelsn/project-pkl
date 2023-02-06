@@ -26,7 +26,7 @@
       </button>
     </div>
     @endif
-      @if ($barang_masuk->count() > 0)
+      {{-- @if ($barang_masuk->count() > 0) --}}
       <h3>{{ $title }}</h3>
       <div class="card">
         <div class="card-body">
@@ -36,11 +36,11 @@
               <div class="row g-3">
                 <div class="col">
                   <label for="tanggal_awal" class="col-form-label">Tanggal Awal</label>
-                  <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" value="" required>
+                  <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" value="{{ $tgl_awal }}" required>
                 </div>
                 <div class="col">
                   <label for="tanggal_akhir" class="col-form-label">Tanggal Akhir</label>
-                  <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="" required>
+                  <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="{{ $tgl_akhir }}" required>
                 </div>
               </div>
               <div class="row mt-3">
@@ -57,9 +57,12 @@
                   <tr>
                     <th>No.</th>
                     <th>Tanggal Masuk</th>
-                    <th>Nama Alat</th>
-                    <th>Jenis Alat</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori Barang</th>
+                    <th>Stok Awal</th>
                     <th>Jumlah</th>
+                    <th>Stok Akhir</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,9 +70,12 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->jenis_barang }}</td>
+                    <td>{{ $item->barang->kode_barang }}</td>
+                    <td>{{ $item->barang->nama_barang }}</td>
+                    <td>{{ $item->kategori->kategori_barang }}</td>
+                    <td>{{ $item->stok_awal }}</td>
                     <td>{{ $item->jumlah_barang }}</td>
+                    <td>{{ $item->stok_akhir }}</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -78,10 +84,10 @@
         
         </div>
       </div>
-      @else
+      {{-- @else
       <div class="alert alert-warning" role="alert">
         <strong>Data {{ $title }} Belum Tersedia.</strong> 
       </div>
-      @endif
+      @endif --}}
       
 @endsection

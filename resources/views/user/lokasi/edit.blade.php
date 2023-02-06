@@ -1,34 +1,28 @@
 @extends('layouts.main')
 
 @section('content')
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>{{ $message }}</strong> 
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        {{-- <span aria-hidden="true"></span> --}}
-      </button>
-    </div>
-    @elseif ($message = Session::get('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Maaf!</strong> {{ $message }}
-      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+    <ul>
+    @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
     </div>
     @endif
-    <h3>Edit Nama Karyawan</h3>
+    <h3>Edit Nama Lokasi</h3>
     <div class="card">
         <div class="card-body">
-            <form method="POST" class="row g-3" action="{{ route('lokasi_user.update',[$karyawan->id]) }}" class="forms-sample">
+            <form method="POST" class="row g-3" action="{{ route('lokasi_user.update',[$lokasi->id]) }}" class="forms-sample">
                 @csrf
                 <div class="form-group">
-                    <label class="form-label" for="karyawan">Nama Karyawan</label>
-                    <input type="text" class="form-control" id="karyawan" name="karyawan" placeholder="Nama Karyawan" value="{{ $karyawan->karyawan }}" required>
+                    <label class="form-label" for="lokasi">Nama Lokasi</label>
+                    <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Nama Lokasi" value="{{ $lokasi->nama_lokasi }}" required>
                 </div>
-                    {{-- <select id="id_karyawan" name="id_karyawan" class="custom-select" id="id_karyawan">
+                    {{-- <select id="id_lokasi" name="id_lokasi" class="custom-select" id="id_lokasi">
                         <option selected>Choose...</option>
-                        @foreach ($karyawan as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama_karyawan }}</option>
+                        @foreach ($lokasi as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_lokasi }}</option>
                         @endforeach
                     </select> --}}
                 <div class="col-12 text-end mt-2">

@@ -13,7 +13,7 @@
     <h3>Edit Data Barang</h3>
     <div class="card">
         <div class="card-body">
-            <form method="POST" class="row g-3" action="{{ route('data_barang_user.update',[$barang->id]) }}" class="forms-sample">
+            <form method="POST" class="row g-3" action="{{ route('data_barang_user.update',[$barang]) }}" class="forms-sample">
                 @csrf
                 <div class="form-group">
                     <label class="form-label" for="nama_barang">Nama Barang</label>
@@ -25,17 +25,17 @@
                         <select class="form-select" name="kategori_barang" id="kategori_barang">
                           <option value="">Pilih kategori barang....</option>
                           @foreach ($kategori_barang as $item)
-                            @if ($item->kategori_barang == $barang->kategori_barang)
-                                <option value="{{ $item->kategori_barang }}" selected>{{ $item->kategori_barang }}</option>
+                            @if ($item->id == $barang->kategori->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->kategori_barang }}</option>
                             @else
-                                <option value="{{ $item->kategori_barang }}">{{ $item->kategori_barang }}</option>
+                                <option value="{{ $item->id }}">{{ $item->kategori_barang }}</option>
                             @endif
                           @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="stok">Stok</label>
+                    <label class="form-label" for="stok">Stok Tersedia</label>
                     <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok" value="{{ $barang->stok }}" required>
                 </div>
                 <div class="col-12 text-end mt-2">

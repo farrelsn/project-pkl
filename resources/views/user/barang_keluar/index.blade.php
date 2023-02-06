@@ -34,10 +34,11 @@
                   <tr>
                     <th>No.</th>
                     <th>Tanggal Keluar</th>
-                    <th>Nama Alat</th>
-                    <th>Jenis Alat</th>
+                    <th>Nama Barang</th>
+                    <th>Jenis Barang</th>
                     <th>Jumlah</th>
                     <th>Pemakai</th>
+                    <th>Lokasi</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -46,10 +47,19 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->tanggal_keluar }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori_barang }}</td>
+                    <td>{{ $item->barang->nama_barang }}</td>
+                    <td>{{ $item->kategori->kategori_barang }}</td>
                     <td>{{ $item->jumlah_barang }}</td>
-                    <td>{{ $item->pemakai }}</td>
+                    @if ($item->pegawai == null)
+                    <td>-</td>
+                    @else
+                    <td>{{ $item->pegawai->nama }}</td>
+                    @endif
+                    @if ($item->lokasi == null)
+                    <td>-</td>
+                    @else
+                    <td>{{ $item->location->nama_lokasi }}</td>
+                    @endif
                     <td class="text-center">
                       {{-- <a class="btn btn-dark" href="{{ route('barang_masuk_user.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a> --}}
                       <a class="btn btn-danger" href="{{ route('barang_keluar_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td>
@@ -84,79 +94,49 @@
                         <div class="modal-body">
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="nama_barang" class="col-form-label">Nama Alat Kerja</label>
+                                  <label for="nama_barang" class="col-form-label">Nama Barang</label>
                                   <select class="form-select" name="nama_barang" id="nama_barang">
-                                      <option value="">Pilih Nama Alat....</option>
+                                      <option value="">Pilih Nama Barang....</option>
                                     @foreach ($barang as $item)
-                                      <option value="{{ $item->nama_barang }}">{{ $item->nama_barang }}</option>
+                                      <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                                     @endforeach
                                   </select>
                               </div>
                             </div>
-                            {{-- <div class="form-group row">
-                                <div class="col-12">
-                                    <label for="nama_alat" class="col-form-label">Nama</label>
-                                    <input type="text" class="form-control" id="nama_alat" name="nama_alat" value="" required>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="form-group row">
-                              <div class="col-12">
-                                  <label for="kategori_barang" class="col-form-label">Jenis Alat</label>
-                                  <select class="form-select" name="kategori_barang" id="kategori_barang">
-                                    <option value="">Pilih Jenis Alat....</option>
-                                    @foreach ($kategori_alat as $item)
-                                        <option value="{{ $item->kategori_alat }}">{{ $item->kategori_alat }}</option>
-                                    @endforeach
-                                  </select>
-                              </div>
-                            </div> --}}
                             <div class="form-group row">
                               <div class="col-12">
                                   <label for="tanggal_keluar" class="col-form-label">Tanggal</label>
                                   <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar" value="{{ $tgl }}" required>
                               </div>
                             </div>
-                            {{-- <div class="form-group row" id="stok_awal_container">
-                              <div class="col-12">
-                                  <label for="stok_awal" class="col-form-label">Stok Awal</label>
-                                  <input type="number" class="form-control" id="stok_awal" name="stok_awal" value="" readonly>
-                              </div>
-                            </div> --}}
                             <div class="form-group row">
                               <div class="col-12">
                                   <label for="jumlah_barang" class="col-form-label">Jumlah</label>
                                   <input type="number" class="form-control" id="jumlah_barang" name="jumlah_barang" value="" required>
                               </div>
                             </div>
-                            {{-- <div class="form-group row" id="stok_akhir_container">
+                            <div class="form-group row">
                               <div class="col-12">
-                                  <label for="stok_akhir" class="col-form-label">Stok Akhir</label>
-                                  <input type="number" class="form-control" id="stok_akhir" name="stok_akhir" value="" readonly>
+                                  <label for="pemakai" class="col-form-label">Pegawai</label>
+                                  <select class="form-select" name="pemakai" id="pemakai">
+                                      <option value="">Pilih Karyawan....</option>
+                                    @foreach ($pegawai as $item)
+                                      <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                  </select>
                               </div>
-                            </div> --}}
-                            {{-- <div class="form-group row">
+                            </div>
+                            <div class="form-group row">
                               <div class="col-12">
-                                  <label for="keterangan" class="col-form-label">Keterangan</label>
-                                  <textarea class="form-control" name="keterangan" id="keterangan" cols="30" rows="10"></textarea>
+                                  <label for="lokasi" class="col-form-label">Lokasi</label>
+                                  <select class="form-select" name="lokasi" id="lokasi">
+                                      <option value="">Pilih Lokasi....</option>
+                                    @foreach ($lokasi as $item)
+                                      <option value="{{ $item->id }}">{{ $item->nama_lokasi }}</option>
+                                    @endforeach
+                                  </select>
                               </div>
-                            </div> --}}
-                            {{-- <div class="form-group row">
-                                <div class="col-12">
-                                    <label for="pemakai" class="col-form-label">Pemakai</label>
-                                    <input type="text" class="form-control" id="pemakai" name="pemakai" value="" required>
-                                </div>
-                              </div> --}}
-                              <div class="form-group row">
-                                <div class="col-12">
-                                    <label for="pemakai" class="col-form-label">Lokasi/Karyawan</label>
-                                    <select class="form-select" name="pemakai" id="pemakai">
-                                        <option value="">Pilih Karyawan....</option>
-                                      @foreach ($lokasi as $item)
-                                        <option value="{{ $item->nama_lokasi }}">{{ $item->nama_lokasi }}</option>
-                                      @endforeach
-                                    </select>
-                                </div>
-                              </div>
+                            </div>
                         </div>
                         <div class="modal-footer bg-white">
                             <button type="submit" class="btn btn-primary">Submit</button>

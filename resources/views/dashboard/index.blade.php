@@ -18,22 +18,22 @@
   <h3>Dashboard</h3>
   <h5>Selamat datang, {{ $username->nama }}</h5>
   @if (Auth::user()->level == 'admin')
-    <a href="{{ route('data_pengguna_admin') }}">
-      <div class="dashboard-card color1">
+    <div class="dashboard-card color1">
+        <a href="{{ route('data_pengguna_admin') }}">
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
             <span class="count">{{ $users->count() }}</span>
           </h3>
-          <p>User</p>
+          <p>Pengguna</p>
         </div>
         <div class="float-right">
           <i class="bi bi-people"></i>
         </div>
-      </div>
-    </a>
-    <a href="{{ route('data_barang_admin') }}">
-      <div class="dashboard-card color2">
+      </a>
+    </div>
+    <div class="dashboard-card color2">
+      <a href="{{ route('data_barang_admin') }}">
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
@@ -44,10 +44,11 @@
         <div class="float-right">
           <i class="bi bi-pen"></i>
         </div>
-      </div>
-    </a>
-    <a href="{{ route('kategori_barang_admin') }}">
-      <div class="dashboard-card color3">
+      </a>
+    </div>
+    <div class="dashboard-card color3">
+      <a href="{{ route('kategori_barang_admin') }}">
+      
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
@@ -58,11 +59,26 @@
         <div class="float-right">
           <i class="bi bi-scissors"></i>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
+    <div class="dashboard-card color4">
+      <a href="{{ route('lokasi_admin') }}">
+      
+        <div class="float-left">
+          <h3>
+            {{-- <span class="currency">$</span> --}}
+            <span class="count">{{ $lokasi->count() }}</span>
+          </h3>
+          <p>Lokasi</p>
+        </div>
+        <div class="float-right">
+          <i class="bi bi-building"></i>
+        </div>
+      </a>
+    </div>
   @elseif (Auth::user()->level == 'user')
-    <a href="{{ route('data_barang_user') }}">
-      <div class="dashboard-card color2">
+    <div class="dashboard-card color2">
+      <a href="{{ route('data_barang_user') }}">
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
@@ -73,18 +89,33 @@
         <div class="float-right">
           <i class="bi bi-pen"></i>
         </div>
-      </div>
-    </a>
-    <a href="{{ route('kategori_barang_user') }}">
-      <div class="dashboard-card color1">
+      </a>
+    </div>
+    <div class="dashboard-card color3"> 
+      <a href="{{ route('kategori_barang_user') }}">
         <div class="float-left">
           <h3><span class="count">{{ $kategori_barang->count() }}</span></h3>
           <p>Kategori Barang</p>
         </div>
         <div class="float-right"><i class="bi bi-scissors"></i>
         </div>
-      </div>
-    </a>
-    
+        
+      </a>
+    </div>
+    <div class="dashboard-card color4">
+      <a href="{{ route('lokasi_user') }}">
+      
+        <div class="float-left">
+          <h3>
+            {{-- <span class="currency">$</span> --}}
+            <span class="count">{{ $lokasi->count() }}</span>
+          </h3>
+          <p>Lokasi</p>
+        </div>
+        <div class="float-right">
+          <i class="bi bi-building"></i>
+        </div>
+      </a>
+    </div>
   @endif
 @endsection

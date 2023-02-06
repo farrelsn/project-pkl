@@ -20,11 +20,11 @@ class LokasiController extends Controller
         $lokasi = tb_lokasi::all();
         if(Auth::user()->level == "admin"){
             $admin = Auth::user();
-            return view('admin.lokasi.index', ['title' => 'Data Karyawan/Lokasi', 'lokasi' => $lokasi, 'admin' => $admin]);
+            return view('admin.lokasi.index', ['title' => 'Data Lokasi', 'lokasi' => $lokasi, 'admin' => $admin]);
         }
         else if (Auth::user()->level == "user"){
             $user = Auth::user();
-            return view('user.lokasi.index', ['title' => 'Data Karyawan/Lokasi', 'lokasi' => $lokasi, 'user' => $user]);
+            return view('user.lokasi.index', ['title' => 'Data Lokasi', 'lokasi' => $lokasi, 'user' => $user]);
         }
     }
 
@@ -85,9 +85,9 @@ class LokasiController extends Controller
     public function edit($id)
     {
         if(Auth::user()->level == "user"){
-            $karyawan = tb_lokasi::where('id', $id)->first();
+            $lokasi = tb_lokasi::where('id', $id)->first();
             $user = User::where('username', Auth::user()->username)->first();
-            return view('user.lokasi.edit', ['title' => 'Edit Data Karyawan/Lokasi', 'karyawan' => $karyawan, 'user' => $user]);
+            return view('user.lokasi.edit', ['title' => 'Data Lokasi', 'lokasi' => $lokasi, 'user' => $user]);
         }
     }
 
@@ -100,7 +100,22 @@ class LokasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'lokasi' => 'required',
+        ], [
+            'lokasi.required' => 'Nama Lokasi tidak boleh kosong!',
+        ]);
+
+        tb_lokasi::where('id', $id)->update([
+            'nama_lokasi' => $request->lokasi,
+         ]);
+
+        if(Auth::user()->level == "admin"){
+            return redirect()->route('lokasi_admin')->with('success', 'Data berhasil diubah!');
+        }
+        else if (Auth::user()->level == "user"){
+            return redirect()->route('lokasi_user')->with('success', 'Data berhasil diubah!');
+        }
     }
 
     /**

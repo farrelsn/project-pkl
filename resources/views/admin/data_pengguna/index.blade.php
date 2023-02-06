@@ -1,6 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+    @endif 
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <strong>{{ $message }}</strong> 
@@ -12,7 +21,7 @@
       @if ($message = Session::get('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>Maaf!</strong> {{ $message }}
-          <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -28,6 +37,7 @@
                     <th>Username</th>
                     <th>Level</th>
                     <th>Foto</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,7 +46,16 @@
                     <td>{{ $item->nama}}</td>
                     <td>{{ $item->username }}</td>
                     <td>{{ $item->level }}</td>
-                    <td class="text-center"><img style="border-radius: 50%" width="30px" height="30px" src="{{ $item->foto == null ? asset('assets/images/default.jpg') :  asset('storage/foto_profil/'. $item->foto) }}" alt="user"></td>
+                    <td class="text-center"><img style="border-radius: 50%" width="30px" height="30px" src="{{ $item->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $item->foto) }}" alt="user"></td>
+                    @if (Auth::user()->id != $item->id)
+                      <td class="text-center">
+                        <a href="{{ route('data_pengguna_admin.delete', $item->id) }}" class="btn btn-danger" onclick="return confirm('Apa anda yakin ingin menghapus pengguna ini?')"><i class="bi bi-trash"></i></a>
+                      </td>
+                    @else
+                      <td class="text-center">
+                        Tidak ada aksi
+                      </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>
@@ -55,7 +74,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div id="showModalTambahPengguna">
-                  <form action="{{ route('tambah_pengguna_admin') }}" method="post">
+                  <form action="{{ route('data_pengguna_admin.store') }}" method="post">
                       @csrf
                       <div class="modal-body">
                           <div class="form-group row">

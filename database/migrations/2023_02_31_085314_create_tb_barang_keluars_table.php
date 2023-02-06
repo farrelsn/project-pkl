@@ -15,13 +15,17 @@ return new class extends Migration
     {
         Schema::create('tb_barang_keluar', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_barang')->nullable();
-            $table->string('nama_barang');
-            $table->string('kategori_barang');
+            $table->foreignId('nama_barang')->references('id')->on('tb_barang')->onDelete('cascade')->onUpdate('cascade');
+            // $table->string('kode_barang')->nullable();
+            // $table->string('nama_barang');
+            $table->foreignId('kategori_barang')->references('id')->on('tb_kategori_barang')->onDelete('cascade')->onUpdate('cascade');
+            //$table->string('kategori_barang');
             $table->string('stok_awal');
             $table->string('jumlah_barang');
             $table->string('stok_akhir');
-            $table->string('pemakai');
+            //$table->string('pemakai');
+            $table->foreignId('pemakai')->nullable()->references('id')->on('tb_pegawai')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('lokasi')->nullable()->references('id')->on('tb_lokasi')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tanggal_keluar');
         });
     }

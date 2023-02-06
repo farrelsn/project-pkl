@@ -1,6 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+    @endif
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>{{ $message }}</strong> 
@@ -24,7 +33,7 @@
                 <thead class="text-center">
                   <tr>
                     <th>No.</th>
-                    <th>Karyawan/Lokasi</th>
+                    <th>Lokasi</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -46,7 +55,7 @@
       </div>
       @else
       <div class="alert alert-warning" role="alert">
-        <strong>Data {{ $title }} Belum Tersedia.</strong> 
+        <strong>{{ $title }} Belum Tersedia.</strong> 
       </div>
       @endif
       <div class="d-flex flex-row-reverse mt-2">
@@ -58,7 +67,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Karyawan/Lokasi</h5>
+                    <h5 class="modal-title">Tambah Lokasi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="showModalTambahBarang">
@@ -67,7 +76,7 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <label for="nama_lokasi" class="col-form-label">Nama Karyawan/Lokasi</label>
+                                    <label for="nama_lokasi" class="col-form-label">Nama Lokasi</label>
                                     <input type="text" class="form-control" id="nama_lokasi" name="nama_lokasi" value="" required>
                                 </div>
                             </div>

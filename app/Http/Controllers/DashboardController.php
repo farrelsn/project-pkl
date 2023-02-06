@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\tb_admin;
 use App\Models\tb_barang;
 use App\Models\tb_kategori_barang;
+use App\Models\tb_lokasi;
 use App\Models\tb_user;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,14 +19,15 @@ class DashboardController extends Controller
         $username = Auth::user();
         $barang = tb_barang::all();
         $kategori_barang = tb_kategori_barang::all();
+        $lokasi = tb_lokasi::all();
         if (Auth::user()->level == 'admin'){
             $users = User::all();
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('dashboard.index', ['title' => 'Dashboard', 'admin' => $admin, 'username' => $username, 'users' => $users, 'barang' => $barang, 'kategori_barang' => $kategori_barang]);
+            return view('dashboard.index', ['title' => 'Dashboard', 'admin' => $admin, 'username' => $username, 'users' => $users, 'barang' => $barang, 'kategori_barang' => $kategori_barang, 'lokasi' => $lokasi]);
         }
         else if (Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
-            return view('dashboard.index', ['title' => 'Dashboard', 'user' => $user, 'username' => $username, 'barang' => $barang, 'kategori_barang' => $kategori_barang]);
+            return view('dashboard.index', ['title' => 'Dashboard', 'user' => $user, 'username' => $username, 'barang' => $barang, 'kategori_barang' => $kategori_barang, 'lokasi' => $lokasi]);
         }
     }
 }

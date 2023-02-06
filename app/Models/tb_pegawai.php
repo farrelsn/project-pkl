@@ -15,4 +15,9 @@ class tb_pegawai extends Model
         'nama',
         'jabatan',
     ];
+
+    public function id_jabatan()
+    {
+        return $this->belongsTo(tb_jabatan::class, 'jabatan', 'id');
+    }
 }

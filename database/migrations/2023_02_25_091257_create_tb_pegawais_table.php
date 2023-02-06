@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_barang', function (Blueprint $table) {
+        Schema::create('tb_pegawai', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_barang')->nullable()->unique();
-            $table->string('nama_barang');
-            $table->string('kategori_barang');
-            $table->enum('lantai',['1','2'])->nullable();
-            $table->unsignedInteger('stok')->default(0);
-            $table->timestamps();
+            $table->string('nama');
+            $table->foreignId('jabatan')->references('id')->on('tb_jabatan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_barang');
+        Schema::dropIfExists('tb_pegawai');
     }
 };

@@ -16,4 +16,9 @@ class tb_barang extends Model
         'stok',
         'kategori_barang',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
+    }
 }

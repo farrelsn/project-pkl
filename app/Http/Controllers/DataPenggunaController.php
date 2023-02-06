@@ -47,8 +47,13 @@ class DataPenggunaController extends Controller
             //dd($request);
             $request->validate([
                 'nama' => 'required',
-                'nama_pengguna' => 'required',
+                'nama_pengguna' => 'required|unique:users,username',
                 'level' => 'required',
+            ],[
+                'nama.required' => 'Nama tidak boleh kosong',
+                'nama_pengguna.required' => 'Nama Pengguna tidak boleh kosong',
+                'level.required' => 'Level tidak boleh kosong',
+                'nama_pengguna.unique' => 'Nama Pengguna sudah digunakan',
             ]);
 
             User::create([
@@ -105,5 +110,19 @@ class DataPenggunaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id){
+        if(Auth::user()->level == "admin"){
+            $user = User::find($id);
+            if($user->username == Auth::user()->username){
+                return redirect()->route('data_pengguna_admin')->with('error', 'Pengguna Tidak Bisa Dihapus');
+            }
+            else{
+                $user->delete();
+    
+                return redirect()->route('data_pengguna_admin')->with('success', 'Pengguna Berhasil Dihapus');
+            }
+        }
     }
 }

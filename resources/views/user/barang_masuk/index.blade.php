@@ -47,8 +47,8 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori_barang }}</td>
+                    <td>{{ $item->barang->nama_barang }}</td>
+                    <td>{{ $item->kategori->kategori_barang }}</td>
                     <td>{{ $item->jumlah_barang }}</td>
                     <td class="text-center">
                       {{-- <a class="btn btn-dark" href="{{ route('barang_masuk_user.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a> --}}
@@ -88,7 +88,7 @@
                                   <select class="form-select" name="nama_barang" id="nama_barang">
                                     <option value="">Pilih Nama Alat....</option>
                                     @foreach ($barang as $item)
-                                        <option value="{{ $item->nama_barang }}">{{ $item->nama_barang }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                                     @endforeach
                                   </select>
                               </div>

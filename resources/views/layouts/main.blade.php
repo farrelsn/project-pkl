@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   @include('layouts.head')
-  <body>
+  <body style="font-family: Roboto, sans-serif;">
+    
     <!-- top navigation bar -->
       @include('layouts.navbar')
     <!-- top navigation bar -->

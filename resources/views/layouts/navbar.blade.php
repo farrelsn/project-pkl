@@ -9,8 +9,8 @@
       >
         <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
       </button>
-      {{-- <img class="mx-3" width="30px" src="{{asset('assets/images/logoKDS.png')}}" alt="Logo KDS"> --}}
-      <a id="nav-title" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#">Sistem Inventaris KDS</a>
+      
+      <a id="nav-title" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="{{ route('dashboard') }}"><img class="mx-3" width="30px" src="{{asset('assets/images/logoKDS.png')}}" alt="Logo KDS">Sistem Inventaris Barang Kerja</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -36,10 +36,10 @@
             >
             
             @if (Auth::user()->level == 'admin')
-              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('storage/foto_profil/'. $admin->foto) }}" alt="user">
+              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user">
 
             @elseif (Auth::user()->level == 'user')
-              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('storage/foto_profil/'. $user->foto) }}" alt="user">
+              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user">
             @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -47,10 +47,10 @@
                 <div class="mb-2">
                   
                   @if (Auth::user()->level == 'admin')
-                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('storage/foto_profil/'. $admin->foto) }}" alt="user">
+                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user">
 
                   @elseif (Auth::user()->level == 'user')
-                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('storage/foto_profil/'. $user->foto) }}" alt="user">
+                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user">
                   @endif
                 </div>
                 <h6 class="my-0">{{ Auth::user()->username }}</h6>

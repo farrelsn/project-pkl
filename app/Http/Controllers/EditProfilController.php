@@ -8,6 +8,7 @@ use App\Models\tb_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class EditProfilController extends Controller
@@ -53,17 +54,34 @@ class EditProfilController extends Controller
             'nama' => 'required',
             'username' => 'required',
             'foto_profil' => 'image|file|max:2048',
+        ],[
+            'nama.required' => 'Nama tidak boleh kosong',
+            'username.required' => 'Username tidak boleh kosong',
+            'foto_profil.image' => 'File yang diupload harus berupa gambar',
+            'foto_profil.file' => 'File yang diupload harus berupa gambar',
+            'foto_profil.max' => 'Ukuran file maksimal 2 MB',
         ]);
 
+        if($request->username != Auth::user()->username){
+            $request->validate([
+                'username' => 'unique:users',
+            ],[
+                'username.unique' => 'Username sudah digunakan',
+            ]);
+        }
+
         if ($request->hasFile('foto_profil')) {
-            $request->file('foto_profil')->store('public/foto_profil');
-            $fileName = $request->file('foto_profil')->hashName();
+            $file = $request->file('foto_profil');
+            $fileName = time().'_'.$file->getClientOriginalName();
+            $path = public_path('assets/images/foto_profil');
+            $file->move($path, $fileName);
         }
 
         if (Auth::user()->level == 'admin'){
             $tb_admin = User::where('username', Auth::user()->username)->first();
+
             if($tb_admin->foto){
-                Storage::delete('public/foto_profil/'.$tb_admin->foto);
+                File::delete(public_path('assets/images/foto_profil/').$tb_admin->foto);
             }
             $tb_admin->update([
                 'nama' => $request->nama,
@@ -79,7 +97,8 @@ class EditProfilController extends Controller
         else if (Auth::user()->level == 'user'){
             $tb_user = User::where('username', Auth::user()->username)->first();
             if($tb_user->foto){
-                Storage::delete('public/foto_profil/'.$tb_user->foto);
+                File::delete(public_path('assets/images/foto_profil').$tb_user->foto);
+                // Storage::delete('public/foto_profil/'.$tb_user->foto);
             }
             $tb_user->update([
                 'nama' => $request->nama,
@@ -124,29 +143,7 @@ class EditProfilController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'username' => 'required',
-        //     'foto' => 'required',
-        // ]);
-
-        // if (Auth::user()->level == 'admin'){
-        //     User::where('username', Auth::user()->username)->update([
-        //         'name' => $request->nama,
-        //         'username' => $request->username,
-        //         'foto' => $request->foto_profil,
-        //     ]);
-        //     return redirect()->route('admin.edit_profil.index');//->with('success', 'Data berhasil diubah');
-        // } 
-        // else if (Auth::user()->level == 'user'){
-        //     User::where('id', Auth::user()->id)->update([
-        //         'name' => $request->nama,
-        //         'username' => $request->username,
-        //         'foto' => $request->foto_profil,
-        //     ]);
-        //     return redirect()->route('user.edit_profil.index');//->with('success', 'Data berhasil diubah');
-        // }
+        //
     }
 
     /**

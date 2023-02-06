@@ -66,13 +66,13 @@ class BarangMasukController extends Controller
         ]);
 
         
-        $stok_awal = tb_barang::where('nama_barang', $request->nama_barang)->first()->stok;
+        $stok_awal = tb_barang::where('id', $request->nama_barang)->first()->stok;
         //dd($stok_awal);
         $stok_akhir = $stok_awal + $request->jumlah_barang;
 
         $db = tb_barang_masuk::create([
             'nama_barang' => $request->nama_barang,
-            'kategori_barang' => tb_barang::where('nama_barang', $request->nama_barang)->first()->kategori_barang,
+            'kategori_barang' => tb_barang::where('id', $request->nama_barang)->first()->kategori_barang,
             'stok_awal' => $stok_awal,
             'jumlah_barang' => $request->jumlah_barang,
             'stok_akhir' => $stok_akhir,
@@ -80,7 +80,7 @@ class BarangMasukController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        $update_barang = tb_barang::where('nama_barang', $request->nama_barang)->first();
+        $update_barang = tb_barang::where('id', $request->nama_barang)->first();
         if($update_barang){
             $update_barang->stok = $update_barang->stok + $request->jumlah_barang;
             $update_barang->save();

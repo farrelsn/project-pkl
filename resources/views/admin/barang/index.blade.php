@@ -25,7 +25,7 @@
     </div>
     @endif
       <h3>{{ $title }}</h3>
-      @if ($alat_kerja->count() > 0)
+      @if ($barang->count() > 0)
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -33,27 +33,28 @@
                 <thead class="text-center">
                   <tr>
                     <th>No.</th>
-                    <th>Nama Alat</th>
-                    <th>Jenis Alat</th>
-                    <th>Stok</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori Barang</th>
+                    <th>Stok Tersedia</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($alat_kerja as $item)
+                  @foreach ($barang as $item)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_alat_kerja }}</td>
-                    <td>{{ $item->jenis_alat_kerja }}</td>
+                    <td>{{ $item->kode_barang }}</td>
+                    <td>{{ $item->nama_barang }}</td>
+                    <td>{{ $item->kategori->kategori_barang }}</td>
                     <td>{{ $item->stok }}</td>
                     <td class="text-center">
-                      <a class="btn btn-dark" href="{{ route('data_alat_kerja_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <a class="btn btn-danger" href="{{ route('data_alat_kerja_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
+                      <a class="btn btn-dark" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a class="btn btn-danger" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
                   </tr>
                   @endforeach
                 </tbody>
             </table>
-            {{-- {{ $alat_kerja->links() }} --}}
           </div>
         
         </div>
@@ -64,34 +65,34 @@
       </div>
       @endif
       <div class="d-flex flex-row-reverse mt-2">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahalatkerja_view"><i class="bi bi-plus-lg"></i> Tambah</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahbarang_view"><i class="bi bi-plus-lg"></i> Tambah</button>
       </div>
       
       {{-- Modal --}}
-      <div class="modal fade" data-bs-backdrop="static" data-keyboard="false" id="tambahalatkerja_view" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" data-bs-backdrop="static" data-keyboard="false" id="tambahbarang_view" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Alat Kerja</h5>
+                    <h5 class="modal-title">Tambah Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="showModalTambahAlatKerja">
-                    <form action="{{ route('data_alat_kerja_admin.store') }}" method="post">
+                <div id="showModalTambahBarang">
+                    <form action="{{ route('data_barang_admin.store') }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <label for="nama_alat" class="col-form-label">Nama</label>
-                                    <input type="text" class="form-control" id="nama_alat" name="nama_alat" value="" required>
+                                    <label for="nama_barang" class="col-form-label">Nama</label>
+                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="jenis_alat" class="col-form-label">Jenis Alat</label>
-                                  <select class="form-select" name="jenis_alat" id="jenis_alat">
-                                    <option value="">Pilih Jenis Alat....</option>
-                                    @foreach ($jenis_alat as $item)
-                                        <option value="{{ $item->jenis_alat }}">{{ $item->jenis_alat }}</option>
+                                  <label for="kategori_barang" class="col-form-label">Kategori Barang</label>
+                                  <select class="form-select" name="kategori_barang" id="kategori_barang">
+                                    <option value="">Pilih Kategori Barang....</option>
+                                    @foreach ($kategori_barang as $item)
+                                        <option value="{{ $item->id }}">{{ $item->kategori_barang }}</option>
                                     @endforeach
                                   </select>
                               </div>

@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"); */
 
-body,
-button {
-  font-family: "Roboto", sans-serif;
-}
+ body {
+  background-color: #f3f3f3;
+ }
+
 
 /*
 .topbar {
@@ -27,9 +27,14 @@ button {
   display: inline-block;
 }*/
 
+
 :root {
   --offcanvas-width: 270px;
   --topNavbarHeight: 62px;
+}
+
+.navbar {
+  height: var(--topNavbarHeight);
 }
 
 .sidebar-nav {
@@ -70,7 +75,7 @@ button {
 }
 
 .sidebar-nav .active{
-  background-color: #f9e0c6;
+  background-color: #ece5a7;
   text-decoration: none;
   color: #71655a !important;
 }
@@ -87,6 +92,10 @@ button {
   background-color: #FB7146;
 }
 
+.color4 {
+  background-color: #FFC107;
+}
+
 .dashboard-card {
   display: inline-block;
   font-family: "Roboto", sans-serif;
@@ -98,6 +107,11 @@ button {
   border-radius: 5px;
 }
 
+.dashboard-card a,.dashboard-card a:hover,.dashboard-card a:visited,.dashboard-card a:active {
+  color: inherit;
+  text-decoration: none;
+ }
+ 
 .dashboard-card:hover {
   transition: all 0.2s ease-in-out;
   filter: brightness(85%);
@@ -132,9 +146,15 @@ button {
 }
 
 #mainNav {
-  background-color: #061f39 !important;
+  background-color: #131a58 !important;
 }
 
 #sidebar {
-  background-color: #061f39 !important;
+  background-color: #131a58 !important;
 }
+
+#sidebar .fa-solid {
+  width: 24px;
+  height: 24px;
+}
+

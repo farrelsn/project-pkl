@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('tb_barang_masuk', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_barang')->nullable();
-            $table->string('nama_barang');
-            //$table->foreignId('kategori_barang')->constrained('tb_kategori_barang');
-            $table->string('kategori_barang');
+            $table->foreignId('nama_barang')->references('id')->on('tb_barang')->onDelete('cascade')->onUpdate('cascade');
+            //$table->string('kode_barang')->nullable();
+            //$table->string('nama_barang');
+            $table->foreignId('kategori_barang')->references('id')->on('tb_kategori_barang')->onDelete('cascade')->onUpdate('cascade');
+            // $table->string('kategori_barang');
             $table->unsignedInteger('stok_awal');
             $table->unsignedInteger('jumlah_barang');
             $table->unsignedInteger('stok_akhir');
             //$table->string('pemakai');
-            $table->string('keterangan')->nullable();
+            // $table->string('keterangan')->nullable();
+            
             $table->date('tanggal_masuk');
         });
     }

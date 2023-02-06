@@ -70,7 +70,7 @@ class BarangController extends Controller
         ]);
 
 
-        $kode_kategori = tb_kategori_barang::where('kategori_barang', $request->kategori_barang)->first()->id;
+        $kode_kategori = tb_kategori_barang::where('id', $request->kategori_barang)->first()->id;
         $kode_barang = tb_barang::where('kategori_barang', $request->kategori_barang)->count() + 1;
         $kode = sprintf("%02d", $kode_kategori).'.'. sprintf("%03d", $kode_barang);
         while(tb_barang::where('kode_barang', $kode)->exists()){
@@ -154,7 +154,7 @@ class BarangController extends Controller
      * @param  \App\Models\tb_barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tb_barang $barang)
+    public function update(Request $request, $barang)
     {
         request()->validate([
             'nama_barang' => 'required',
@@ -171,9 +171,32 @@ class BarangController extends Controller
         ]);
 
         // dd($request);
+        //dd($id, $request->kategori_barang);
+
+        $brg = tb_barang::where('id', $barang)->first();
+        if($brg->kategori_barang == $request->kategori_barang){
+            dd($brg);
+            $kode = $barang->kode_barang;
+        }
+        // if(tb_kategori_barang::where('id', $request->kategori_barang)->exists()){
+        // }
+        else{
+            $kode_kategori = tb_kategori_barang::where('id', $request->kategori_barang)->first()->id;
+            //dd($kode_kategori);
+            $kode_barang = tb_barang::where('kode_barang',$brg->kode_barang)->first()->kode_barang;//tb_barang::where('kategori_barang', $request->kategori_barang)->count() + 1;
+            $kode_barang = substr($kode_barang, 3);
+            $kode = sprintf("%02d", $kode_kategori).'.'. sprintf("%03d", $kode_barang);
+            while(tb_barang::where('kode_barang', $kode)->exists()){
+                $kode_barang = $kode_barang + 1;
+                $kode = sprintf("%02d", $kode_kategori).'.'. sprintf("%03d", $kode_barang);
+            }
+        }
+
+        
 
         $db = tb_barang::where('id', $request->id)->update([
             'nama_barang' => $request->nama_barang,
+            'kode_barang' => $kode,
             'kategori_barang' => $request->kategori_barang,
             'stok' => $request->stok,
         ]);

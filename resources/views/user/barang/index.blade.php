@@ -33,9 +33,10 @@
                 <thead class="text-center">
                   <tr>
                     <th>No.</th>
-                    <th>Nama Alat</th>
-                    <th>Kategori Alat</th>
-                    <th>Stok</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori Barang</th>
+                    <th>Stok Tersedia</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -43,8 +44,9 @@
                   @foreach ($barang as $item)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->kode_barang }}</td>
                     <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori_barang }}</td>
+                    <td>{{ $item->kategori->kategori_barang }}</td>
                     <td>{{ $item->stok }}</td>
                     <td class="text-center">
                       <a class="btn btn-dark" href="{{ route('data_barang_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -72,7 +74,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Alat Kerja</h5>
+                    <h5 class="modal-title">Tambah Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="showModalTambahBarang">
@@ -87,11 +89,11 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="kategori_barang" class="col-form-label">Kategori Alat</label>
+                                  <label for="kategori_barang" class="col-form-label">Kategori Barang</label>
                                   <select class="form-select" name="kategori_barang" id="kategori_barang">
-                                    <option value="">Pilih Kategori Alat....</option>
+                                    <option value="">Pilih Kategori Barang....</option>
                                     @foreach ($kategori_barang as $item)
-                                        <option value="{{ $item->kategori_barang }}">{{ $item->kategori_barang }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->kategori_barang }}</option>
                                     @endforeach
                                   </select>
                               </div>

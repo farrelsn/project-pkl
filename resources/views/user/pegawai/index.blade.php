@@ -1,6 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+      </div>
+    @endif
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>{{ $message }}</strong> 
@@ -34,7 +43,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama }}</td>
-                    <td>{{ $item->jabatan }}</td>
+                    <td>{{ $item->id_jabatan->nama_jabatan }}</td>
                     <td class="text-center">
                         <a class="btn btn-dark" href="{{ route('pegawai_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a class="btn btn-danger" href="{{ route('pegawai_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
@@ -76,7 +85,12 @@
                             <div class="form-group row">
                               <div class="col-12">
                                   <label for="jabatan" class="col-form-label">Jabatan</label>
-                                  <input type="text" class="form-control" id="jabatan" name="jabatan" value="" required>
+                                  <select class="form-select" name="jabatan" id="jabatan">
+                                    <option value="">Pilih Jabatan....</option>
+                                    @foreach ($jabatan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_jabatan }}</option>
+                                    @endforeach
+                                  </select>
                               </div>
                           </div>
                         </div>

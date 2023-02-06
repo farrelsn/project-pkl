@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <div class="text-center">
                         <div class="container">
-                            <img id="pp" style="width: 200px; height: 200px" class="border border-white border-3 rounded-circle" src="{{ $user->foto == null ? asset('assets/images/default.jpg') : asset('storage/foto_profil/'. $user->foto) }}" alt="...">
+                            <img id="pp" style="width: 200px; height: 200px" class="border border-white border-3 rounded-circle" src="{{ $user->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $user->foto) }}" alt="...">
                         </div>
                         <div class="form-group">
                             <label for="foto-profil" class="form-label">Silahkan masukkan foto profil</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ $user->username }}" readonly>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ $user->username }}" required>
             </div>
             <div class="col-12 text-end">
                 <button type="submit" class="btn btn-sm btn-success mb-0">Submit</button>
