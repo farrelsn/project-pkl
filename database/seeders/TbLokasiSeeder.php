@@ -16,11 +16,13 @@ class TbLokasiSeeder extends Seeder
     public function run()
     {
         DB::table('tb_lokasi')->insert([
-            'nama_lokasi' => 'Ruang Meeting'
+            'nama_lokasi' => 'Ruang Meeting',
+            'lantai' => '2'
         ]);
 
         DB::table('tb_lokasi')->insert([
-            'nama_lokasi' => 'Ruang Security'
+            'nama_lokasi' => 'Ruang Security',
+            'lantai' => '1'
         ]);
     }
 }

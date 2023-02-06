@@ -143,7 +143,7 @@ class BarangController extends Controller
             $barang = tb_barang::where('id', $id)->first();
             $user = User::where('username', Auth::user()->username)->first();
             $kategoribarang = tb_kategori_barang::all();
-            return view('user.barang.edit', ['title' => 'Data Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang]);
+            return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang]);
         }
     }
 
@@ -175,8 +175,8 @@ class BarangController extends Controller
 
         $brg = tb_barang::where('id', $barang)->first();
         if($brg->kategori_barang == $request->kategori_barang){
-            dd($brg);
-            $kode = $barang->kode_barang;
+            //dd($brg);
+            $kode = $brg->kode_barang;
         }
         // if(tb_kategori_barang::where('id', $request->kategori_barang)->exists()){
         // }

@@ -48,8 +48,10 @@ class LokasiController extends Controller
     {
         request()->validate([
             'nama_lokasi' => 'required',
+            'lantai' => 'required',
         ], [
             'nama_lokasi.required' => 'Nama Lokasi tidak boleh kosong!',
+            'lantai.required' => 'Lantai tidak boleh kosong!',
         ]);
 
         tb_lokasi::create([
@@ -89,6 +91,11 @@ class LokasiController extends Controller
             $user = User::where('username', Auth::user()->username)->first();
             return view('user.lokasi.edit', ['title' => 'Data Lokasi', 'lokasi' => $lokasi, 'user' => $user]);
         }
+        else if(Auth::user()->level == "admin"){
+            $lokasi = tb_lokasi::where('id', $id)->first();
+            $admin = User::where('username', Auth::user()->username)->first();
+            return view('admin.lokasi.edit', ['title' => 'Data Lokasi', 'lokasi' => $lokasi, 'admin' => $admin]);
+        }
     }
 
     /**
@@ -102,12 +109,15 @@ class LokasiController extends Controller
     {
         request()->validate([
             'lokasi' => 'required',
+            'lantai' => 'required',
         ], [
             'lokasi.required' => 'Nama Lokasi tidak boleh kosong!',
+            'lantai.required' => 'Lantai tidak boleh kosong!',
         ]);
 
         tb_lokasi::where('id', $id)->update([
             'nama_lokasi' => $request->lokasi,
+            'lantai' => $request->lantai,
          ]);
 
         if(Auth::user()->level == "admin"){

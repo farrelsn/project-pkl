@@ -60,6 +60,7 @@
                     <th>Kategori Barang</th>
                     <th>Pemakai</th>
                     <th>Lokasi</th>
+                    <th>Lantai</th>
                     <th>Stok Awal</th>
                     <th>Jumlah</th>
                     <th>Stok Akhir</th>
@@ -80,8 +81,10 @@
                     @endif
                     @if ($item->lokasi == null)
                     <td>-</td>
+                    <td>-</td>
                     @else
-                    <td>{{ $item->location->nama_lokasi }}</td>
+                    <td>{{ $item->location->nama_lokasi}}</td>
+                    <td>{{ $item->location->lantai }}</td>
                     @endif
                     <td>{{ $item->stok_awal }}</td>
                     <td>{{ $item->jumlah_barang }}</td>

@@ -19,6 +19,19 @@
                     <label class="form-label" for="lokasi">Nama Lokasi</label>
                     <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Nama Lokasi" value="{{ $lokasi->nama_lokasi }}" required>
                 </div>
+                <div class="form-group">
+                    <label for="lantai" class="col-form-label">Lantai</label>
+                    <select class="form-select" name="lantai" id="lantai">
+                      <option value="" >Pilih Lantai....</option>
+                      @if($lokasi->lantai == "1")
+                        <option value="1" selected>Lantai 1</option>
+                        <option value="2">Lantai 2</option>
+                      @elseif($lokasi->lantai == "2")
+                        <option value="1">Lantai 1</option>
+                        <option value="2" selected>Lantai 2</option>
+                        @endif
+                    </select>
+                </div>
                     {{-- <select id="id_lokasi" name="id_lokasi" class="custom-select" id="id_lokasi">
                         <option selected>Choose...</option>
                         @foreach ($lokasi as $item)

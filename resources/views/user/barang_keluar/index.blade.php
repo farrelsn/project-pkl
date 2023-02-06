@@ -30,36 +30,39 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class=" text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Tanggal Keluar</th>
-                    <th>Nama Barang</th>
-                    <th>Jenis Barang</th>
-                    <th>Jumlah</th>
-                    <th>Pemakai</th>
-                    <th>Lokasi</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($barang_keluar as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->tanggal_keluar }}</td>
-                    <td>{{ $item->barang->nama_barang }}</td>
-                    <td>{{ $item->kategori->kategori_barang }}</td>
-                    <td>{{ $item->jumlah_barang }}</td>
-                    @if ($item->pegawai == null)
-                    <td>-</td>
-                    @else
-                    <td>{{ $item->pegawai->nama }}</td>
-                    @endif
-                    @if ($item->lokasi == null)
-                    <td>-</td>
-                    @else
-                    <td>{{ $item->location->nama_lokasi }}</td>
-                    @endif
+              <thead class=" text-center">
+                <tr>
+                  <th>No.</th>
+                  <th>Tanggal Keluar</th>
+                  <th>Nama Barang</th>
+                  <th>Jenis Barang</th>
+                  <th>Jumlah</th>
+                  <th>Pemakai</th>
+                  <th>Lokasi</th>
+                  <th>Lantai</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($barang_keluar as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->tanggal_keluar }}</td>
+                  <td>{{ $item->barang->nama_barang }}</td>
+                  <td>{{ $item->kategori->kategori_barang }}</td>
+                  <td>{{ $item->jumlah_barang }}</td>
+                  @if ($item->pegawai == null)
+                  <td>-</td>
+                  @else
+                  <td>{{ $item->pegawai->nama }}</td>
+                  @endif
+                  @if ($item->lokasi == null)
+                  <td>-</td>
+                  <td>-</td>
+                  @else
+                  <td>{{ $item->location->nama_lokasi }}</td>
+                  <td>{{ $item->location->lantai }}</td>
+                  @endif
                     <td class="text-center">
                       {{-- <a class="btn btn-dark" href="{{ route('barang_masuk_user.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a> --}}
                       <a class="btn btn-danger" href="{{ route('barang_keluar_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td>

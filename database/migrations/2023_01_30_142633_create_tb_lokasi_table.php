@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tb_lokasi', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lokasi');
+            $table->enum('lantai', ['1', '2']);
         });
     }
 

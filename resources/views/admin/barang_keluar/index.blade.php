@@ -39,6 +39,7 @@
                     <th>Jumlah</th>
                     <th>Pemakai</th>
                     <th>Lokasi</th>
+                    <th>Lantai</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -57,8 +58,10 @@
                     @endif
                     @if ($item->lokasi == null)
                     <td>-</td>
+                    <td>-</td>
                     @else
                     <td>{{ $item->location->nama_lokasi }}</td>
+                    <td>{{ $item->location->lantai }}</td>
                     @endif
                     <td class="text-center">
                       {{-- <a class="btn btn-dark" href="{{ route('barang_masuk_admin.edit', [$item->id]) }}"><i class="bi bi-pencil-fill"></i></a> --}}

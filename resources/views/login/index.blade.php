@@ -14,7 +14,7 @@
     
     <title>Sistem Inventaris KDS || {{$title}}</title>
   </head> 
-<body style="background-color: #3742a6">
+<body style="background-color: #3742a6; font-family:Roboto,sans-serif;">
 {{-- <!-- Section: Design Block -->
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #d6d0d0;
 position: relative;

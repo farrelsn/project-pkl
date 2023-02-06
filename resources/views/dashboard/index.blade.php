@@ -39,7 +39,7 @@
             {{-- <span class="currency">$</span> --}}
             <span class="count">{{ $barang->count() }}</span>
           </h3>
-          <p>Barang</p>
+          <p>Data Barang</p>
         </div>
         <div class="float-right">
           <i class="bi bi-pen"></i>
@@ -84,7 +84,7 @@
             {{-- <span class="currency">$</span> --}}
             <span class="count">{{ $barang->count() }}</span>
           </h3>
-          <p>Barang</p>
+          <p>Data Barang</p>
         </div>
         <div class="float-right">
           <i class="bi bi-pen"></i>

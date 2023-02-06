@@ -34,6 +34,7 @@
                   <tr>
                     <th>No.</th>
                     <th>Lokasi</th>
+                    <th>Lantai</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -42,6 +43,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama_lokasi }}</td>
+                    <td>{{ $item->lantai }}</td>
                     <td class="text-center">
                         <a class="btn btn-dark" href="{{ route('lokasi_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a class="btn btn-danger" href="{{ route('lokasi_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
@@ -79,6 +81,16 @@
                                     <label for="nama_lokasi" class="col-form-label">Nama Lokasi</label>
                                     <input type="text" class="form-control" id="nama_lokasi" name="nama_lokasi" value="" required>
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-12">
+                                  <label for="lantai" class="col-form-label">Kategori Barang</label>
+                                  <select class="form-select" name="lantai" id="lantai">
+                                    <option value="">Pilih Lantai....</option>
+                                    <option value="1">Lantai 1</option>
+                                    <option value="2">Lantai 2</option>
+                                  </select>
+                              </div>
                             </div>
                         </div>
                         <div class="modal-footer bg-white">
