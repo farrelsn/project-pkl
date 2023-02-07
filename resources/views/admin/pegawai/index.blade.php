@@ -57,7 +57,7 @@
       </div>
       @else
       <div class="alert alert-warning" role="alert">
-        <strong>Data {{ $title }} Belum Tersedia.</strong> 
+        <strong>{{ $title }} Belum Tersedia.</strong> 
       </div>
       @endif
       <div class="d-flex flex-row-reverse mt-2">

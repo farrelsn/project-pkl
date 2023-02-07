@@ -15,6 +15,8 @@ class tb_barang extends Model
         'nama_barang',
         'stok',
         'kategori_barang',
+        'harga_lama',
+        'harga_baru'
     ];
 
     public function kategori()

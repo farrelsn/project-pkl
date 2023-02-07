@@ -22,6 +22,8 @@ return new class extends Migration
             //$table->string('kategori_barang');
             //$table->enum('lantai',['1','2'])->nullable();
             $table->unsignedInteger('stok')->default(0);
+            $table->unsignedInteger('harga_lama')->default(0);
+            $table->unsignedInteger('harga_baru')->default(0);
             $table->timestamps();
         });
     }

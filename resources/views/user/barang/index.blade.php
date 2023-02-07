@@ -37,6 +37,8 @@
                     <th>Nama Barang</th>
                     <th>Kategori Barang</th>
                     <th>Stok Tersedia</th>
+                    <th>Harga Lama</th>
+                    <th>Harga Baru</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -48,6 +50,8 @@
                     <td>{{ $item->nama_barang }}</td>
                     <td>{{ $item->kategori->kategori_barang }}</td>
                     <td>{{ $item->stok }}</td>
+                    <td>{{ $item->harga_lama }}</td>
+                    <td>{{ $item->harga_baru }}</td>
                     <td class="text-center">
                       <a class="btn btn-dark" href="{{ route('data_barang_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                       <a class="btn btn-danger" href="{{ route('data_barang_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
@@ -96,6 +100,18 @@
                                         <option value="{{ $item->id }}">{{ $item->kategori_barang }}</option>
                                     @endforeach
                                   </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-12">
+                                  <label for="harga_lama" class="col-form-label">Harga Awal</label>
+                                  <input type="number" class="form-control" id="harga_lama" name="harga_lama" value="" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-12">
+                                  <label for="harga_baru" class="col-form-label">Harga Akhir</label>
+                                  <input type="number" class="form-control" id="harga_baru" name="harga_baru" value="" required>
                               </div>
                             </div>
                             <div class="form-group row">

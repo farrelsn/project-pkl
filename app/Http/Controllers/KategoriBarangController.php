@@ -97,6 +97,11 @@ class KategoriBarangController extends Controller
             $user = User::where('username', Auth::user()->username)->first();
             return view('user.kategori_barang.edit', ['title' => 'Kategori Barang', 'kategori_barang' => $kategori_barang, 'user' => $user]);
         }
+        else if(Auth::user()->level == "admin"){
+            $kategori_barang = tb_kategori_barang::where('id', $id)->first();
+            $admin = User::where('username', Auth::user()->username)->first();
+            return view('admin.kategori_barang.edit', ['title' => 'Kategori Barang', 'kategori_barang' => $kategori_barang, 'admin' => $admin]);
+        }
     }
 
     /**

@@ -59,6 +59,8 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
+            'harga_lama' => 'required|integer|min:0',
+            'harga_baru' => 'required|integer|min:0',
             //'pemakai' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
@@ -66,6 +68,12 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
+            'harga_lama.required' => 'Harga awal tidak boleh kosong',
+            'harga_lama.integer' => 'Harga awal harus berupa bilangan bulat',
+            'harga_lama.min' => 'Harga awal tidak boleh kurang dari 0',
+            'harga_baru.required' => 'Harga akhir tidak boleh kosong',
+            'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
+            'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             //'pemakai.required' => 'Pemakai tidak boleh kosong',
         ]);
 
@@ -95,6 +103,8 @@ class BarangController extends Controller
             'kategori_barang' => $request->kategori_barang,
             'stok' => $request->stok,
             'kode_barang' => $kode,
+            'harga_lama' => $request->harga_lama,
+            'harga_baru' => $request->harga_baru,
         ]);
 
         //dd($db);
@@ -145,6 +155,12 @@ class BarangController extends Controller
             $kategoribarang = tb_kategori_barang::all();
             return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang]);
         }
+        else if(Auth::user()->level == "admin"){
+            $barang = tb_barang::where('id', $id)->first();
+            $admin = User::where('username', Auth::user()->username)->first();
+            $kategoribarang = tb_kategori_barang::all();
+            return view('admin.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategoribarang]);
+        }
     }
 
     /**
@@ -160,6 +176,8 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
+            'harga_lama' => 'required|integer|min:0',
+            'harga_baru' => 'required|integer|min:0',
             //'pemakai' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
@@ -167,6 +185,12 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
+            'harga_lama.required' => 'Harga awal tidak boleh kosong',
+            'harga_lama.integer' => 'Harga awal harus berupa bilangan bulat',
+            'harga_lama.min' => 'Harga awal tidak boleh kurang dari 0',
+            'harga_baru.required' => 'Harga akhir tidak boleh kosong',
+            'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
+            'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             //'pemakai.required' => 'Pemakai tidak boleh kosong',
         ]);
 
@@ -199,6 +223,8 @@ class BarangController extends Controller
             'kode_barang' => $kode,
             'kategori_barang' => $request->kategori_barang,
             'stok' => $request->stok,
+            'harga_lama' => $request->harga_lama,
+            'harga_baru' => $request->harga_baru,
         ]);
 
         if(Auth::user()->level == "admin"){
