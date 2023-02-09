@@ -49,6 +49,18 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                  <div class="col-12">
+                      <label class="form-label" for="bagian">Bagian</label>
+                      <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Bagian" value="{{ $pegawai->bagian }}" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-12">
+                      <label class="form-label" for="departemen">departemen</label>
+                      <input type="text" class="form-control" id="departemen" name="departemen" placeholder="Departemen" value="{{ $pegawai->departemen }}" required>
+                  </div>
+                </div>
                 <div class="col-12 text-end mt-2">
                     <button type="submit" class="btn btn-sm btn-success mb-0">Submit</button>
                     <a href="{{ route('pegawai_user') }}" class="btn btn-sm btn-dark mb-0">Back</a>

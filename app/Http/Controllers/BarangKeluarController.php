@@ -245,8 +245,8 @@ class BarangKeluarController extends Controller
 
     public function delete($id)
     {
-        $barang_masuk = tb_barang_keluar::find($id);
-        $barang_masuk->delete();
+        $barang_keluar = tb_barang_keluar::find($id);
+        $barang_keluar->delete();
         if(Auth::user()->level == "admin"){
             return redirect()->route('barang_keluar_admin')->with('success', 'Data berhasil dihapus');
         }

@@ -14,8 +14,10 @@ use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\LaporanBarangKeluarController;
 use App\Http\Controllers\LaporanBarangMasukController;
 use App\Http\Controllers\LaporanGudangController;
+use App\Http\Controllers\LaporanPengajuanBarangController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PengajuanBarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/ganti-password', [GantiPasswordController::class, 'index'])->name('ganti_password');
     Route::post('/ganti-password', [GantiPasswordController::class, 'store'])->name('ganti_password.update');
 
+    // Pengajuan Barang (Excel)
+    Route::get('/pengajuan-barang/export', [PengajuanBarangController::class, 'export'])->name('pengajuan_barang.excel');
+    Route::get('/laporan-pengajuan-barang/export', [LaporanPengajuanBarangController::class, 'export'])->name('laporan_pengajuan_barang.excel');
+
     Route::group(['middleware' => ['user']], function () {
 
         // Barang
@@ -64,6 +70,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/kategori-barang/{id}', [KategoriBarangController::class, 'edit'])->name('kategori_barang_user.edit');
         Route::post('/user/kategori-barang/{id}', [KategoriBarangController::class, 'update'])->name('kategori_barang_user.update');
         Route::get('/user/kategori-barang/{id}/delete', [KategoriBarangController::class, 'delete'])->name('kategori_barang_user.delete');
+        
+        // Pengajuan Barang
+        Route::get('/user/pengajuan-barang', [PengajuanBarangController::class, 'index'])->name('pengajuan_barang_user');
+        Route::post('/user/pengajuan-barang', [PengajuanBarangController::class, 'store'])->name('pengajuan_barang_user.store');
+        Route::get('/user/pengajuan-barang/{id}/delete', [PengajuanBarangController::class, 'delete'])->name('pengajuan_barang_user.delete');
+        Route::get('/user/pengajuan-barang/{id}/store-laporan', [PengajuanBarangController::class, 'storelaporan'])->name('pengajuan_barang_user.storelaporan');
 
         // Barang Masuk
         Route::get('/user/barang-masuk', [BarangMasukController::class, 'index'])->name('barang_masuk_user');
@@ -103,7 +115,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/laporan-barang-masuk', [LaporanBarangMasukController::class, 'index'])->name('laporan_barang_masuk_user');
         Route::post('/user/laporan-barang-masuk', [LaporanBarangMasukController::class, 'filter'])->name('laporan_barang_masuk_user.filter');
 
-        //Laporan Barang Keluar
+        // Laporan Pengajuan Barang
+        Route::get('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'index'])->name('laporan_pengajuan_barang_user');
+        Route::post('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'filter'])->name('laporan_pengajuan_barang_user.filter');
+        Route::get('/user/laporan-pengajuan-barang/{id}/delete', [LaporanPengajuanBarangController::class, 'delete'])->name('laporan_pengajuan_barang_user.delete');
+
+        // Laporan Barang Keluar
         Route::get('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'index'])->name('laporan_barang_keluar_user');
         Route::post('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'filter'])->name('laporan_barang_keluar_user.filter');
 
@@ -124,6 +141,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin/kategori-barang/{id}', [KategoriBarangController::class, 'edit'])->name('kategori_barang_admin.edit');
         Route::post('/admin/kategori-barang/{id}', [KategoriBarangController::class, 'update'])->name('kategori_barang_admin.update');
         Route::get('/admin/kategori-barang/{id}/delete', [KategoriBarangController::class, 'delete'])->name('kategori_barang_admin.delete');
+
+        // Pengajuan Barang
+        Route::get('/admin/pengajuan-barang', [PengajuanBarangController::class, 'index'])->name('pengajuan_barang_admin');
+        Route::post('/admin/pengajuan-barang', [PengajuanBarangController::class, 'store'])->name('pengajuan_barang_admin.store');
+        Route::get('/admin/pengajuan-barang/{id}/delete', [PengajuanBarangController::class, 'delete'])->name('pengajuan_barang_admin.delete');
+        Route::get('/admin/pengajuan-barang/{id}/store-laporan', [PengajuanBarangController::class, 'storelaporan'])->name('pengajuan_barang_admin.storelaporan');
 
         // Barang Masuk
         Route::get('/admin/barang-masuk', [BarangMasukController::class, 'index'])->name('barang_masuk_admin');
@@ -168,6 +191,11 @@ Route::group(['middleware' => ['auth']], function () {
         // Laporan Barang Masuk
         Route::get('/admin/laporan-barang-masuk', [LaporanBarangMasukController::class, 'index'])->name('laporan_barang_masuk_admin');
         Route::post('/admin/laporan-barang-masuk', [LaporanBarangMasukController::class, 'filter'])->name('laporan_barang_masuk_admin.filter');
+
+        // Laporan Pengajuan Barang
+        Route::get('/admin/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'index'])->name('laporan_pengajuan_barang_admin');
+        Route::post('/admin/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'filter'])->name('laporan_pengajuan_barang_admin.filter');
+        Route::get('/admin/laporan-pengajuan-barang/{id}/delete', [LaporanPengajuanBarangController::class, 'delete'])->name('laporan_pengajuan_barang_admin.delete');
 
         //Laporan Barang Keluar
         Route::get('/admin/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'index'])->name('laporan_barang_keluar_admin');

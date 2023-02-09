@@ -35,9 +35,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="stok">Stok Tersedia</label>
-                    <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok" value="{{ $barang->stok }}" required>
+                    <div class="col-12">
+                        <label class="form-label" for="stok">Stok Satuan</label>
+                        <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok" value="{{ $barang->stok }}" required>
+                    </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-12">
+                        <label for="qtydus" class="col-form-label">Qty/Dus</label>
+                        <input type="number" class="form-control" id="qtydus" name="qtydus" value="{{ $barang->qtydus }}" required>
+                    </div>
+                  </div>
                 <div class="form-group">
                     <div class="col-12">
                         <label for="harga_lama" class="col-form-label">Harga Lama</label>

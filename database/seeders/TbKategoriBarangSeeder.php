@@ -16,7 +16,7 @@ class TbKategoriBarangSeeder extends Seeder
     public function run()
     {
         DB::table('tb_kategori_barang')->insert([
-            'kategori_barang' => 'ATK',
+            'kategori_barang' => 'Alat Tulis Kantor',
         ]);
 
         DB::table('tb_kategori_barang')->insert([
@@ -27,8 +27,14 @@ class TbKategoriBarangSeeder extends Seeder
             'kategori_barang' => 'Furniture',
         ]);
 
-        
+        DB::table('tb_kategori_barang')->insert([
+            'kategori_barang' => 'Pantry',
+        ]);
 
+        DB::table('tb_kategori_barang')->insert([
+            'kategori_barang' => 'Alat Kebersihan',
+        ]);
 
+    
     }
 }

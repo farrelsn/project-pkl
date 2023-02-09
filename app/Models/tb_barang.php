@@ -16,11 +16,17 @@ class tb_barang extends Model
         'stok',
         'kategori_barang',
         'harga_lama',
-        'harga_baru'
+        'harga_baru',
+        'qtydus',
     ];
 
     public function kategori()
     {
         return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
+    }
+
+    public function rupiah($nilai)
+    {
+        return "Rp. " . number_format($nilai, 2, ',', '.');
     }
 }

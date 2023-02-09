@@ -46,7 +46,8 @@ $(document).ready(function () {
   });
 });
 
-var inputFoto = document.getElementById("foto-profil");
+//var inputFoto = document.getElementById("foto-profil");
+
 
 // var stok_awal_container = document.getElementById("stok_awal_container");
 // var stok_akhir_container = document.getElementById("stok_akhir_container");

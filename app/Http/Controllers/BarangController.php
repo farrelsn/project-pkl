@@ -56,14 +56,15 @@ class BarangController extends Controller
     {
     
         request()->validate([
-            'nama_barang' => 'required',
+            'nama_barang' => 'required|unique:tb_barang,nama_barang',
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
             'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
-            //'pemakai' => 'required',
+            'qtydus' => 'integer|min:0',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
+            'nama_barang.unique' => 'Nama barang sudah ada',
             'kategori_barang.required' => 'kategori barang tidak boleh kosong',
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
@@ -74,7 +75,8 @@ class BarangController extends Controller
             'harga_baru.required' => 'Harga akhir tidak boleh kosong',
             'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
-            //'pemakai.required' => 'Pemakai tidak boleh kosong',
+            'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
+            'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
         ]);
 
 
@@ -102,6 +104,7 @@ class BarangController extends Controller
             'nama_barang' => $request->nama_barang,
             'kategori_barang' => $request->kategori_barang,
             'stok' => $request->stok,
+            'qtydus' => $request->qtydus,
             'kode_barang' => $kode,
             'harga_lama' => $request->harga_lama,
             'harga_baru' => $request->harga_baru,
@@ -173,14 +176,15 @@ class BarangController extends Controller
     public function update(Request $request, $barang)
     {
         request()->validate([
-            'nama_barang' => 'required',
+            'nama_barang' => 'required|unique:tb_barang,nama_barang,'.$barang,
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
             'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
-            //'pemakai' => 'required',
+            'qtydus' => 'integer|min:0',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
+            'nama_barang.unique' => 'Nama barang sudah ada',
             'kategori_barang.required' => 'kategori barang tidak boleh kosong',
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
@@ -191,7 +195,8 @@ class BarangController extends Controller
             'harga_baru.required' => 'Harga akhir tidak boleh kosong',
             'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
-            //'pemakai.required' => 'Pemakai tidak boleh kosong',
+            'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
+            'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
         ]);
 
         // dd($request);
@@ -225,6 +230,7 @@ class BarangController extends Controller
             'stok' => $request->stok,
             'harga_lama' => $request->harga_lama,
             'harga_baru' => $request->harga_baru,
+            'qtydus' => $request->qtydus,
         ]);
 
         if(Auth::user()->level == "admin"){

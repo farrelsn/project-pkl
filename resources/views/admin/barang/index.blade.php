@@ -36,9 +36,10 @@
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Kategori Barang</th>
-                    <th>Stok Tersedia</th>
+                    <th>Qty/Dus</th>
                     <th>Harga Lama</th>
                     <th>Harga Baru</th>
+                    <th>Stok Satuan</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -49,9 +50,22 @@
                     <td>{{ $item->kode_barang }}</td>
                     <td>{{ $item->nama_barang }}</td>
                     <td>{{ $item->kategori->kategori_barang }}</td>
+                    @if ($item->qtydus == null)
+                    <td>-</td>
+                    @else
+                    <td>{{ $item->qtydus }}</td>
+                    @endif
+                    @if($item->harga_lama == 0)
+                    <td>-</td>
+                    @else
+                    <td>{{ $item->rupiah($item->harga_lama) }}</td>
+                    @endif
+                    @if($item->harga_baru == 0)
+                    <td>-</td>
+                    @else
+                    <td>{{ $item->rupiah($item->harga_baru) }}</td>
+                    @endif
                     <td>{{ $item->stok }}</td>
-                    <td>{{ $item->harga_lama }}</td>
-                    <td>{{ $item->harga_baru }}</td>
                     <td class="text-center">
                       <a class="btn btn-dark" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                       <a class="btn btn-danger" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
@@ -103,8 +117,14 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="stok" class="col-form-label">Stok</label>
+                                  <label for="stok" class="col-form-label">Stok Satuan</label>
                                   <input type="number" class="form-control" id="stok" name="stok" value="" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-12">
+                                  <label for="qtydus" class="col-form-label">Qty/Dus</label>
+                                  <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -130,6 +150,4 @@
         </div>
       </div>
       
-    {{-- </div>
-  </div> --}}
 @endsection

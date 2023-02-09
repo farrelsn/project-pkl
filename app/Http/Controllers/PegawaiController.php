@@ -50,15 +50,21 @@ class PegawaiController extends Controller
         request()->validate([
             'nama_pegawai' => 'required',
             'jabatan' => 'required',
+            'bagian' => 'required',
+            'departemen' => 'required',
         ], [
             'nama_pegawai.required' => 'Nama Pegawai tidak boleh kosong!',
             'jabatan.required' => 'Jabatan tidak boleh kosong!',
+            'bagian.required' => 'Bagian tidak boleh kosong!',
+            'departemen.required' => 'Departemen tidak boleh kosong!',
         ]);
 
 
         tb_pegawai::create([
             'nama' => $request->nama_pegawai,
             'jabatan' => $request->jabatan,
+            'bagian' => $request->bagian,
+            'departemen' => $request->departemen,
         ]);
 
         if(Auth::user()->level == "admin"){
@@ -113,9 +119,13 @@ class PegawaiController extends Controller
         request()->validate([
             'nama_pegawai' => 'required',
             'jabatan' => 'required',
+            'bagian' => 'required',
+            'departemen' => 'required',
         ], [
             'nama_pegawai.required' => 'Nama Pegawai tidak boleh kosong!',
             'jabatan.required' => 'Jabatan tidak boleh kosong!',
+            'bagian.required' => 'Bagian tidak boleh kosong!',
+            'departemen.required' => 'Departemen tidak boleh kosong!',
         ]);
 
         //dd($request);
@@ -123,6 +133,8 @@ class PegawaiController extends Controller
         $db = tb_pegawai::where('id', $id)->update([
             'nama' => $request->nama_pegawai,
             'jabatan' => $request->jabatan,
+            'bagian' => $request->bagian,
+            'departemen' => $request->departemen,
         ]);
 
         if(Auth::user()->level == "admin"){

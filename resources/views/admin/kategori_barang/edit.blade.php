@@ -11,7 +11,7 @@
     @elseif ($message = Session::get('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong>Maaf!</strong> {{ $message }}
-      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>

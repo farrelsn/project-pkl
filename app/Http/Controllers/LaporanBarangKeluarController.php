@@ -107,6 +107,8 @@ class LaporanBarangKeluarController extends Controller
         $barang = tb_barang::all();
         $kategori_barang = tb_kategori_barang::all();
         $barang_keluar = tb_barang_keluar::whereBetween('tanggal_keluar', [$tgl_awal, $tgl_akhir])->get();
+
+
         //dd($tgl_awal, $tgl_akhir, $barang_masuk);
         if(Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
@@ -117,4 +119,6 @@ class LaporanBarangKeluarController extends Controller
             return view('admin.laporan_barang_keluar.index', ['title' => 'Laporan Pemakaian Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'barang' => $barang, 'barang_keluar' => $barang_keluar]);
         }
     }
+
+    
 }

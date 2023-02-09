@@ -35,6 +35,8 @@
                     <th>No.</th>
                     <th>Pegawai</th>
                     <th>Jabatan</th>
+                    <th>Bagian</th>
+                    <th>Departemen</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -44,6 +46,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->id_jabatan->nama_jabatan }}</td>
+                    <td>{{ $item->bagian }}</td>
+                    <td>{{ $item->departemen }}</td>
                     <td class="text-center">
                         <a class="btn btn-dark" href="{{ route('pegawai_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a class="btn btn-danger" href="{{ route('pegawai_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
@@ -92,7 +96,19 @@
                                     @endforeach
                                   </select>
                               </div>
-                          </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-12">
+                                  <label class="form-label" for="bagian">Bagian</label>
+                                  <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Bagian" value="" required>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-12">
+                                  <label class="form-label" for="departemen">Departemen</label>
+                                  <input type="text" class="form-control" id="departemen" name="departemen" placeholder="Departemen" value="" required>
+                              </div>
+                            </div>
                         </div>
                         <div class="modal-footer bg-white">
                             <button type="submit" class="btn btn-primary">Submit</button>

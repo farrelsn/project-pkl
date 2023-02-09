@@ -14,6 +14,8 @@ class tb_pegawai extends Model
     protected $fillable = [
         'nama',
         'jabatan',
+        'bagian',
+        'departemen',
     ];
 
     public function id_jabatan()

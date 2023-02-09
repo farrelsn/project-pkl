@@ -17,21 +17,23 @@ class TbBarangSeeder extends Seeder
     {
         DB::table('tb_barang')->insert([
             'nama_barang' => 'Amplop Coklat Kecil',
-            'stok' => '119',
+            'stok' => '113',
             'kategori_barang' => '1',
             'kode_barang' => '01.001',
         ]);
 
         DB::table('tb_barang')->insert([
             'nama_barang' => 'Amplop Coklat 1/2 Folio',
-            'stok' => '106',
+            'stok' => '37',
             'kategori_barang' => '1',
             'kode_barang' => '01.002',
+            'qtydus' => '100',
+            'harga_baru' => '40000',
         ]);
 
         DB::table('tb_barang')->insert([
             'nama_barang' => 'Amplop Coklat F4',
-            'stok' => '0',
+            'stok' => '119',
             'kategori_barang' => '1',
             'kode_barang' => '01.003',
         ]);

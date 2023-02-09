@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('stok')->default(0);
             $table->unsignedInteger('harga_lama')->default(0);
             $table->unsignedInteger('harga_baru')->default(0);
+            $table->unsignedInteger('qtydus')->default(0);
             $table->timestamps();
         });
     }

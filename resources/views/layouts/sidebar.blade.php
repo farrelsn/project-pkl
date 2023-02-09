@@ -54,10 +54,16 @@
             <li>
               <div class="text-muted small fw-bold text-uppercase px-3 mb-3">Mutasi Barang</div>
             </li>
-            <li>
+            {{-- <li>
               <a href="{{ route('barang_masuk_user') }}" class="nav-link px-3 {{ ($title == 'Daftar Pemasukan Barang')? 'active' : '' }}">
                 <span class="me-3"><i class="bi bi-archive-fill"></i></span>
                 <span>Pemasukan Barang</span>
+              </a>
+            </li> --}}
+            <li>
+              <a href="{{ route('pengajuan_barang_user') }}" class="nav-link px-3 {{ ($title == 'Daftar Pengajuan Barang')? 'active' : '' }}">
+                <span class="me-3"><i class="bi bi-archive-fill"></i></span>
+                <span>Pengajuan Barang</span>
               </a>
             </li>
             <li>
@@ -94,12 +100,20 @@
                       <span>Laporan Master</span>
                     </a>
                   </li> --}}
-                  <li>
+                  {{-- <li>
                     <a href="{{ route('laporan_barang_masuk_user') }}" class="nav-link px-3 {{ ($title == 'Laporan Pemasukan Barang')? 'active' : '' }}">
                       <span class="me-2"
                         ><i class="bi bi-speedometer2"></i
                       ></span>
                       <span>Laporan Pemasukan Barang</span>
+                    </a>
+                  </li> --}}
+                  <li>
+                    <a href="{{ route('laporan_pengajuan_barang_user') }}" class="nav-link px-3 {{ ($title == 'Laporan Pengajuan Barang')? 'active' : '' }}">
+                      <span class="me-2"
+                        ><i class="bi bi-speedometer2"></i
+                      ></span>
+                      <span>Laporan Pengajuan Barang</span>
                     </a>
                   </li>
                   <li>
@@ -167,12 +181,19 @@
           <li>
             <div class="text-muted small fw-bold text-uppercase px-3 mb-3">Mutasi Barang</div>
           </li>
-          <li>
+          {{-- <li>
             <a href="{{ route('barang_masuk_admin') }}" class="nav-link px-3 {{ ($title == 'Daftar Pemasukan Barang')? 'active' : '' }}">
               <span class="me-2"><i class="bi bi-archive-fill"></i></span>
               <span>Pemasukan Barang</span>
             </a>
+          </li> --}}
+          <li>
+            <a href="{{ route('pengajuan_barang_admin') }}" class="nav-link px-3 {{ ($title == 'Daftar Pengajuan Barang')? 'active' : '' }}">
+              <span class="me-2"><i class="bi bi-archive-fill"></i></span>
+              <span>Pengajuan Barang</span>
+            </a>
           </li>
+          <li>
           <li>
             <a href="{{ route('barang_keluar_admin') }}" class="nav-link px-3 {{ ($title == 'Daftar Pemakaian Barang')? 'active' : '' }}">
               <span class="me-2"><i class="bi bi-archive-fill"></i></span>
@@ -207,12 +228,20 @@
                     <span>Laporan Master</span>
                   </a>
                 </li> --}}
-                <li>
+                {{-- <li>
                   <a href="{{ route('laporan_barang_masuk_admin') }}" class="nav-link px-3 {{ ($title == 'Laporan Pemasukan Barang')? 'active' : '' }}">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
                     <span>Laporan Pemasukan Barang</span>
+                  </a>
+                </li> --}}
+                <li>
+                  <a href="{{ route('laporan_pengajuan_barang_admin') }}" class="nav-link px-3 {{ ($title == 'Laporan Pengajuan Barang')? 'active' : '' }}">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Laporan Pengajuan Barang</span>
                   </a>
                 </li>
                 <li>
