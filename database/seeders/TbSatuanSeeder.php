@@ -15,12 +15,20 @@ class TbSatuanSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('tb_satuan')->insert([
-        //     'nama_satuan' => 'Buah',
-        // ]);
+        DB::table('tb_satuan')->insert([
+            'nama_satuan' => 'pcs',
+        ]);
 
-        // DB::table('tb_satuan')->insert([
-        //     'nama_satuan' => 'Bungkus',
-        // ]);
+        DB::table('tb_satuan')->insert([
+            'nama_satuan' => 'dus',
+        ]);
+
+        DB::table('tb_satuan')->insert([
+            'nama_satuan' => 'set',
+        ]);
+
+        DB::table('tb_satuan')->insert([
+            'nama_satuan' => 'rim',
+        ]);
     }
 }

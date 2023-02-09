@@ -40,9 +40,24 @@
                         <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok" value="{{ $barang->stok }}" required>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label for="satuan" class="col-form-label">Satuan</label>
+                        <select class="form-select" name="satuan" id="satuan">
+                          <option value="">Pilih Satuan....</option>
+                          @foreach ($satuan as $item)
+                            @if ($item->id == $barang->satuan)
+                                <option value="{{ $item->id }}" selected>{{ $item->nama_satuan }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->nama_satuan }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                    </div>
+                  </div>
                 <div class="form-group">
                     <div class="col-12">
-                        <label for="qtydus" class="col-form-label">Qty/Dus</label>
+                        <label for="qtydus" class="col-form-label">Qty</label>
                         <input type="number" class="form-control" id="qtydus" name="qtydus" value="{{ $barang->qtydus }}" required>
                     </div>
                   </div>

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BarangAdminExport;
+use App\Exports\BarangUserExport;
 use App\Models\barang;
 use App\Models\tb_kategori_barang;
 use App\Http\Controllers\Controller;
 use App\Models\tb_admin;
 use App\Models\tb_barang;
 use App\Models\tb_lokasi;
+use App\Models\tb_satuan;
 use App\Models\tb_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -25,14 +29,15 @@ class BarangController extends Controller
     {
         $barang = tb_barang::all();
         $kategori_barang = tb_kategori_barang::all();
+        $satuan = tb_satuan::all();
         if (Auth::user()->level == 'admin') {
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('admin.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang]);
+            return view('admin.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'satuan' => $satuan]);
         } 
         else if (Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
             //dd($kategori_barang);
-            return view('user.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang]);
+            return view('user.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'satuan' => $satuan]);
         }
     }
 
@@ -62,6 +67,7 @@ class BarangController extends Controller
             'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
+            'satuan' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -77,6 +83,7 @@ class BarangController extends Controller
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
             'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
+            'satuan.required' => 'Satuan tidak boleh kosong',
         ]);
 
 
@@ -108,6 +115,7 @@ class BarangController extends Controller
             'kode_barang' => $kode,
             'harga_lama' => $request->harga_lama,
             'harga_baru' => $request->harga_baru,
+            'satuan' => $request->satuan,
         ]);
 
         //dd($db);
@@ -156,13 +164,15 @@ class BarangController extends Controller
             $barang = tb_barang::where('id', $id)->first();
             $user = User::where('username', Auth::user()->username)->first();
             $kategoribarang = tb_kategori_barang::all();
-            return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang]);
+            $satuan = tb_satuan::all();
+            return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang, 'satuan' => $satuan]);
         }
         else if(Auth::user()->level == "admin"){
             $barang = tb_barang::where('id', $id)->first();
             $admin = User::where('username', Auth::user()->username)->first();
             $kategoribarang = tb_kategori_barang::all();
-            return view('admin.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategoribarang]);
+            $satuan = tb_satuan::all();
+            return view('admin.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategoribarang, 'satuan' => $satuan]);
         }
     }
 
@@ -182,6 +192,7 @@ class BarangController extends Controller
             'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
+            'satuan' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -197,6 +208,7 @@ class BarangController extends Controller
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
             'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
+            'satuan.required' => 'Satuan tidak boleh kosong',
         ]);
 
         // dd($request);
@@ -231,6 +243,7 @@ class BarangController extends Controller
             'harga_lama' => $request->harga_lama,
             'harga_baru' => $request->harga_baru,
             'qtydus' => $request->qtydus,
+            'satuan' => $request->satuan,
         ]);
 
         if(Auth::user()->level == "admin"){
@@ -270,6 +283,15 @@ class BarangController extends Controller
         }
         else if(Auth::user()->level == "user"){
             return redirect()->route('data_barang_user')->with(['success' => 'Data berhasil dihapus']);
+        }
+    }
+
+    public function export(){
+        if(Auth::user()->level == "user"){
+            return Excel::download(new BarangUserExport, 'Data Barang.xlsx');
+        }
+        else if(Auth::user()->level == "admin"){
+            return Excel::download(new BarangAdminExport, 'Data Barang.xlsx');
         }
     }
 }

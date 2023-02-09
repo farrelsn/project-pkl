@@ -18,11 +18,17 @@ class tb_barang extends Model
         'harga_lama',
         'harga_baru',
         'qtydus',
+        'satuan',
     ];
 
     public function kategori()
     {
         return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
+    }
+
+    public function satuan()
+    {
+        return $this->belongsTo(tb_satuan::class, 'satuan', 'id');
     }
 
     public function rupiah($nilai)

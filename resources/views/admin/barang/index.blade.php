@@ -32,15 +32,20 @@
             <table id="example" class="display" style="width: 100%" cellspacing="0">
                 <thead class="text-center">
                   <tr>
-                    <th>No.</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Kategori Barang</th>
-                    <th>Qty/Dus</th>
-                    <th>Harga Lama</th>
-                    <th>Harga Baru</th>
-                    <th>Stok Satuan</th>
-                    <th>Aksi</th>
+                    <th rowspan="2">No.</th>
+                    <th rowspan="2">Kode Barang</th>
+                    <th rowspan="2">Nama Barang</th>
+                    <th rowspan="2">Kategori Barang</th>
+                    <th class="text-center" colspan="{{ $satuan->count() }}">Qty</th>
+                    <th rowspan="2">Harga Lama</th>
+                    <th rowspan="2">Harga Baru</th>
+                    <th rowspan="2">Stok Satuan</th>
+                    <th rowspan="2">Aksi</th>
+                  </tr>
+                  <tr>
+                    @foreach ($satuan as $item)
+                    <th>{{ $item->nama_satuan }}</th>
+                    @endforeach
                   </tr>
                 </thead>
                 <tbody>
@@ -50,11 +55,13 @@
                     <td>{{ $item->kode_barang }}</td>
                     <td>{{ $item->nama_barang }}</td>
                     <td>{{ $item->kategori->kategori_barang }}</td>
-                    @if ($item->qtydus == null)
-                    <td>-</td>
-                    @else
-                    <td>{{ $item->qtydus }}</td>
-                    @endif
+                    @foreach ($satuan as $sat)
+                      @if ($item->satuan == $sat->id)
+                      <td>{{ $item->qtydus }}</td>
+                      @else
+                      <td>-</td>
+                      @endif
+                    @endforeach
                     @if($item->harga_lama == 0)
                     <td>-</td>
                     @else
@@ -77,12 +84,16 @@
         
         </div>
       </div>
+      
+      <div class="d-flex justify-content-between my-2">
+        <a href="{{ route('data_barang_admin.export') }}" class="btn btn-dark"><i class="bi bi-file-earmark-excel"></i> Export Excel</a>
+        
       @else
       <div class="alert alert-warning" role="alert">
         <strong>Data {{ $title }} Belum Tersedia.</strong> 
       </div>
+      <div class="d-flex flex-row-reverse my-2">
       @endif
-      <div class="d-flex flex-row-reverse mt-2">
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahbarang_view"><i class="bi bi-plus-lg"></i> Tambah</button>
       </div>
       
@@ -123,7 +134,18 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="qtydus" class="col-form-label">Qty/Dus</label>
+                                  <label for="satuan" class="col-form-label">Satuan</label>
+                                  <select class="form-select" name="satuan" id="satuan">
+                                    <option value="">Pilih Satuan....</option>
+                                    @foreach ($satuan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_satuan }}</option>
+                                    @endforeach
+                                  </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-12">
+                                  <label for="qtydus" class="col-form-label">Qty</label>
                                   <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
                               </div>
                             </div>

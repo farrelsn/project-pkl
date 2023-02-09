@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Pengajuan Barang (Excel)
     Route::get('/pengajuan-barang/export', [PengajuanBarangController::class, 'export'])->name('pengajuan_barang.excel');
-    Route::get('/laporan-pengajuan-barang/export', [LaporanPengajuanBarangController::class, 'export'])->name('laporan_pengajuan_barang.excel');
+    Route::get('/laporan-pengajuan-barang/export/', [LaporanPengajuanBarangController::class, 'export'])->name('laporan_pengajuan_barang.excel');
 
     Route::group(['middleware' => ['user']], function () {
 
@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/tambah-barang/{id}', [BarangController::class, 'edit'])->name('data_barang_user.edit');
         Route::post('/user/tambah-barang/{id}', [BarangController::class, 'update'])->name('data_barang_user.update');
         Route::get('/user/tambah-barang/{id}/delete', [BarangController::class, 'delete'])->name('data_barang_user.delete');
+        Route::get('/user/data-barang/export', [BarangController::class, 'export'])->name('data_barang_user.export');
 
 
         // Kategori Barang
@@ -119,6 +120,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'index'])->name('laporan_pengajuan_barang_user');
         Route::post('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'filter'])->name('laporan_pengajuan_barang_user.filter');
         Route::get('/user/laporan-pengajuan-barang/{id}/delete', [LaporanPengajuanBarangController::class, 'delete'])->name('laporan_pengajuan_barang_user.delete');
+        Route::get('/user/laporan-pengajuan-barang/export', [LaporanPengajuanBarangController::class, 'export'])->name('laporan_pengajuan_barang_user.export');
+
 
         // Laporan Barang Keluar
         Route::get('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'index'])->name('laporan_barang_keluar_user');
@@ -134,6 +137,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin/tambah-barang/{id}', [BarangController::class, 'edit'])->name('data_barang_admin.edit');
         Route::post('/admin/tambah-barang/{id}', [BarangController::class, 'update'])->name('data_barang_admin.update');
         Route::get('/admin/tambah-barang/{id}/delete', [BarangController::class, 'delete'])->name('data_barang_admin.delete');
+        Route::get('/admin/data-barang/export', [BarangController::class, 'export'])->name('data_barang_admin.export');
 
         // Kategori Barang
         Route::get('/admin/kategori-barang', [KategoriBarangController::class, 'index'])->name('kategori_barang_admin');

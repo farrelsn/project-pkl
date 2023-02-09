@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedInteger('harga_lama')->default(0);
             $table->unsignedInteger('harga_baru')->default(0);
             $table->unsignedInteger('qtydus')->default(0);
+            $table->foreignId('satuan')->references('id')->on('tb_satuan')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

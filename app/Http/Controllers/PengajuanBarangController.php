@@ -68,16 +68,31 @@ class PengajuanBarangController extends Controller
             'qtydus.integer' => 'Qty Dus Harus Berupa Angka',
         ]);
 
-        if(tb_barang::where('id',$request->nama_barang)->first()->harga_baru == 0){
-            return redirect()->route('pengajuan_barang_admin')->with('error','Harga Barang Belum Diisi!');
-        }
+        if(Auth::user()->level == "admin"){
+            if(tb_barang::where('id',$request->nama_barang)->first()->harga_baru == 0){
+                return redirect()->route('pengajuan_barang_admin')->with('error','Harga Barang Belum Diisi!');
+            }
 
-        if(tb_barang::where('id',$request->nama_barang)->first()->qtydus == 0){
-            return redirect()->route('pengajuan_barang_admin')->with('error','Jumlah Barang/Dus Belum Diisi!');
-        }
+            if(tb_barang::where('id',$request->nama_barang)->first()->qtydus == 0){
+                return redirect()->route('pengajuan_barang_admin')->with('error','Jumlah Barang/Dus Belum Diisi!');
+            }
 
-        if(tb_pengajuan_barang::where('nama_barang',$request->nama_barang)->where('tanggal_masuk',$request->tanggal_masuk)->first()){
-            return redirect()->route('pengajuan_barang_admin')->with('error','Data Sudah Ada!');
+            if(tb_pengajuan_barang::where('nama_barang',$request->nama_barang)->where('tanggal_masuk',$request->tanggal_masuk)->first()){
+                return redirect()->route('pengajuan_barang_admin')->with('error','Data Sudah Ada!');
+            }
+        }
+        else if (Auth::user()->level == "user"){
+            if(tb_barang::where('id',$request->nama_barang)->first()->harga_baru == 0){
+                return redirect()->route('pengajuan_barang_user')->with('error','Harga Barang Belum Diisi!');
+            }
+
+            if(tb_barang::where('id',$request->nama_barang)->first()->qtydus == 0){
+                return redirect()->route('pengajuan_barang_user')->with('error','Jumlah Barang/Dus Belum Diisi!');
+            }
+
+            if(tb_pengajuan_barang::where('nama_barang',$request->nama_barang)->where('tanggal_masuk',$request->tanggal_masuk)->first()){
+                return redirect()->route('pengajuan_barang_user')->with('error','Data Sudah Ada!');
+            }
         }
 
 

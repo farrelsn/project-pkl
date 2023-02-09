@@ -106,7 +106,7 @@
                             <div class="form-group">
                               <div class="col-12">
                                   <label class="form-label" for="departemen">Departemen</label>
-                                  <input type="text" class="form-control" id="departemen" name="jabatan" placeholder="Departemen" value="" required>
+                                  <input type="text" class="form-control" id="departemen" name="departemen" placeholder="Departemen" value="" required>
                               </div>
                             </div>
                         </div>
