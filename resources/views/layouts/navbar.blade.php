@@ -10,7 +10,7 @@
         <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
       </button>
       
-      <a id="nav-title" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="{{ route('dashboard') }}"><img class="mx-3 mb-1" width="40px" src="{{asset('assets/images/logoKDS.jpeg')}}" alt="Logo KDS">Sistem Inventaris Barang Kerja</a>
+      <a id="nav-title" class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="{{ route('dashboard') }}"><img class="mx-3 mb-1" width="40px" src="{{asset('assets/images/logoKDS.png')}}" alt="Logo KDS">Sistem Inventaris Barang Kerja</a>
       <button
         class="navbar-toggler"
         type="button"

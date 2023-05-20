@@ -120,5 +120,16 @@ class LaporanBarangKeluarController extends Controller
         }
     }
 
+    // public function delete($id){
+    //     $pengajuan_barang = tb_laporan_pengajuan_barang::find($id);
+    //     if($pengajuan_barang){
+    //         $pengajuan_barang->delete();
+    //         return redirect()->back()->with('success', 'Data berhasil dihapus');
+    //     }
+    //     else{
+    //         return redirect()->back()->with('error', 'Data tidak ditemukan');
+    //     }
+    // }
+
     
 }

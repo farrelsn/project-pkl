@@ -22,6 +22,7 @@ class LaporanPengajuanBarangExport implements FromCollection, WithHeadings, Shou
     */
     public function collection()
     {
+        
         return tb_laporan_pengajuan_barang::select('tanggal_masuk', 'nama_barang', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total')->get();
     }
 

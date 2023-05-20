@@ -149,12 +149,12 @@
                                   <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                               <div class="col-12">
                                   <label for="harga_lama" class="col-form-label">Harga Awal</label>
                                   <input type="number" class="form-control" id="harga_lama" name="harga_lama" value="" required>
                               </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                               <div class="col-12">
                                   <label for="harga_baru" class="col-form-label">Harga Akhir</label>

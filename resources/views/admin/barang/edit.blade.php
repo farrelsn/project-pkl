@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <div class="col-12">
                         <label for="harga_lama" class="col-form-label">Harga Lama</label>
-                        <input type="number" class="form-control" id="harga_lama" name="harga_lama" value="{{ $barang->harga_lama }}" required>
+                        <input type="number" class="form-control" id="harga_lama" name="harga_lama" value="{{ $barang->harga_lama }}" readonly>
                     </div>
                 </div>
                 <div class="form-group">

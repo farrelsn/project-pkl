@@ -34,20 +34,49 @@
             <form action="{{ route('laporan_pengajuan_barang_user.filter') }}" method="POST">
               @csrf
               <div class="row g-3">
-                <div class="col">
+                {{-- <div class="col">
                   <label for="tanggal_awal" class="col-form-label">Tanggal Awal</label>
                   <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" value="{{ $tgl_awal }}" required>
                 </div>
                 <div class="col">
                   <label for="tanggal_akhir" class="col-form-label">Tanggal Akhir</label>
                   <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="{{ $tgl_akhir }}" required>
+                </div> --}}
+                <div class="col">
+                  <select class="form-select" name="bulan" id="bulan" required>
+                    <option value="">Pilih Bulan....</option>
+                    <option value="01" {{ $bulan == "01" ? "selected" : "" }} >Januari</option>
+                    <option value="02" {{ $bulan == "02" ? "selected" : "" }}>Februari</option>
+                    <option value="03" {{ $bulan == "03" ? "selected" : "" }}>Maret</option>
+                    <option value="04" {{ $bulan == "04" ? "selected" : "" }}>April</option>
+                    <option value="05" {{ $bulan == "05" ? "selected" : "" }}>Mei</option>
+                    <option value="06" {{ $bulan == "06" ? "selected" : "" }}>Juni</option>
+                    <option value="07" {{ $bulan == "07" ? "selected" : "" }}>Juli</option>
+                    <option value="08" {{ $bulan == "08" ? "selected" : "" }}>Agustus</option>
+                    <option value="09" {{ $bulan == "09" ? "selected" : "" }}>September</option>
+                    <option value="10" {{ $bulan == "10" ? "selected" : "" }}>Oktober</option>
+                    <option value="11" {{ $bulan == "11" ? "selected" : "" }}>November</option>
+                    <option value="12" {{ $bulan == "12" ? "selected" : "" }}>Desember</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <select class="form-select" name="thn" id="thn" required>
+                    <option value="">Pilih Tahun....</option>
+                    @foreach ($tahun as $item)
+                      <option value="{{ $item }}" {{ $thn == $item ? "selected" : "" }}>{{ $item }}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col">
                   <button type="submit" class="btn btn-warning">Filter</button>
                   <a href="{{ route('laporan_pengajuan_barang_user') }}" class="btn btn-secondary">Reset</a>
-                  <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel') }}">Export</a>
+                  @if ($tgl_awal != null && $tgl_akhir != null)
+                    <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel', [$tgl_awal, $tgl_akhir]) }}">Export</a>
+                  @else
+                    <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel') }}">Export</a>
+                  @endif
                 </div>
               </div>
             </form>

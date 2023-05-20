@@ -95,7 +95,7 @@ class PengajuanBarangController extends Controller
             }
         }
 
-
+        
         tb_pengajuan_barang::create([
             'nama_barang' => $request->nama_barang,
             'tanggal_masuk' => $request->tanggal_masuk,
@@ -160,13 +160,23 @@ class PengajuanBarangController extends Controller
 
     public function delete($id){
         $pengajuan_barang = tb_pengajuan_barang::find($id);
-        $pengajuan_barang->delete();
-        if(Auth::user()->level == "admin"){
-            return redirect()->route('pengajuan_barang_admin')->with('success', 'Data berhasil dihapus');
+        if(!$pengajuan_barang){
+            if(Auth::user()->level == "admin"){
+                return redirect()->route('pengajuan_barang_admin')->with('error', 'Data sudah dihapus');
+            }
+            else if (Auth::user()->level == "user"){
+                return redirect()->route('pengajuan_barang_user')->with('error', 'Data sudah dihapus');
+            }
         }
-        else if (Auth::user()->level == "user"){
-            return redirect()->route('pengajuan_barang_user')->with('success', 'Data berhasil dihapus');
-        }
+        else{
+            $pengajuan_barang->delete();
+            if(Auth::user()->level == "admin"){
+                return redirect()->route('pengajuan_barang_admin')->with('success', 'Data berhasil dihapus');
+            }
+            else if (Auth::user()->level == "user"){
+                return redirect()->route('pengajuan_barang_user')->with('success', 'Data berhasil dihapus');
+            }
+        }   
     }
 
     public function export(){
@@ -180,53 +190,54 @@ class PengajuanBarangController extends Controller
 
     public function storelaporan($id){
         $pengajuan_barang = tb_pengajuan_barang::find($id);
-
-        $barang = tb_barang::where('id', $pengajuan_barang->nama_barang)->first();
-        $barang->stok = $barang->stok + $pengajuan_barang->qtydus * $pengajuan_barang->satuan_isi;
-        $barang->save();
-
-
-        if(tb_laporan_pengajuan_barang::where('nama_barang',$pengajuan_barang->barang->nama_barang)->where('tanggal_masuk',$pengajuan_barang->tanggal_masuk)->first()){
-            $db = tb_laporan_pengajuan_barang::where('nama_barang',$pengajuan_barang->barang->nama_barang)->where('tanggal_masuk',$pengajuan_barang->tanggal_masuk)->first();
-            $db->update([
-                'stok_akhir' => $barang->stok,
-                'qtydus' => $db->qtydus + $pengajuan_barang->qtydus,
-                'total' => $db->total + ($pengajuan_barang->qtydus * $pengajuan_barang->harga),
-            ]);
+        if($pengajuan_barang){
+            $barang = tb_barang::where('id', $pengajuan_barang->nama_barang)->first();
+            $barang->stok = $barang->stok + $pengajuan_barang->qtydus * $pengajuan_barang->satuan_isi;
+            $barang->save();
+            if(tb_laporan_pengajuan_barang::where('nama_barang',$pengajuan_barang->barang->nama_barang)->where('tanggal_masuk',$pengajuan_barang->tanggal_masuk)->first()){
+                $db = tb_laporan_pengajuan_barang::where('nama_barang',$pengajuan_barang->barang->nama_barang)->where('tanggal_masuk',$pengajuan_barang->tanggal_masuk)->first();
+                $db->update([
+                    'stok_akhir' => $barang->stok,
+                    'qtydus' => $db->qtydus + $pengajuan_barang->qtydus,
+                    'total' => $db->total + ($pengajuan_barang->qtydus * $pengajuan_barang->harga),
+                ]);
+            }
+            else{
+                $db = tb_laporan_pengajuan_barang::create([
+                    'nama_barang' => $pengajuan_barang->barang->nama_barang,
+                    'tanggal_masuk' => $pengajuan_barang->tanggal_masuk,
+                    'stok_akhir' => $barang->stok,
+                    'qtydus' => $pengajuan_barang->qtydus,
+                    'satuan_isi' => $pengajuan_barang->satuan_isi,
+                    'harga' => $pengajuan_barang->harga,
+                    'total' => $pengajuan_barang->qtydus * $pengajuan_barang->harga,
+                ]);
+            }
+            $pengajuan_barang->delete();
+            if($db){
+                if(Auth::user()->level == "admin"){
+                    return redirect()->route('pengajuan_barang_admin')->with('success', 'Data berhasil disetujui');
+                }
+                else if (Auth::user()->level == "user"){
+                    return redirect()->route('pengajuan_barang_user')->with('success', 'Data berhasil disetujui');
+                }
+            }
+            else{
+                if(Auth::user()->level == "admin"){
+                    return redirect()->route('pengajuan_barang_admin')->with('error', 'Data gagal disetujui');
+                }
+                else if (Auth::user()->level == "user"){
+                    return redirect()->route('pengajuan_barang_user')->with('error', 'Data gagal disetujui');
+                }
+            }
         }
         else{
-            $db = tb_laporan_pengajuan_barang::create([
-                'nama_barang' => $pengajuan_barang->barang->nama_barang,
-                'tanggal_masuk' => $pengajuan_barang->tanggal_masuk,
-                'stok_akhir' => $barang->stok,
-                'qtydus' => $pengajuan_barang->qtydus,
-                'satuan_isi' => $pengajuan_barang->satuan_isi,
-                'harga' => $pengajuan_barang->harga,
-                'total' => $pengajuan_barang->qtydus * $pengajuan_barang->harga,
-            ]);
-        }
-
-        
-
-        
-        $pengajuan_barang->delete();
-
-        if($db){
             if(Auth::user()->level == "admin"){
-                return redirect()->route('pengajuan_barang_admin')->with('success', 'Data berhasil disetujui');
+                return redirect()->route('pengajuan_barang_admin')->with('error', 'Data sudah dihapus');
             }
             else if (Auth::user()->level == "user"){
-                return redirect()->route('pengajuan_barang_user')->with('success', 'Data berhasil disetujui');
+                return redirect()->route('pengajuan_barang_user')->with('error', 'Data sudah dihapus');
             }
         }
-        else{
-            if(Auth::user()->level == "admin"){
-                return redirect()->route('pengajuan_barang_admin')->with('error', 'Data gagal disetujui');
-            }
-            else if (Auth::user()->level == "user"){
-                return redirect()->route('pengajuan_barang_user')->with('error', 'Data gagal disetujui');
-            }
-        }
-        
     }
 }

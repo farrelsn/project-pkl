@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-between mt-2">
-        <a type="button" class="btn btn-dark" href="{{ route("pengajuan_barang.excel") }}">Export</a>
+        {{-- <a type="button" class="btn btn-dark" href="{{ route("pengajuan_barang.excel") }}">Export</a> --}}
       @else
       <div class="alert alert-warning" role="alert">
         <strong>Data {{ $title }} Belum Tersedia.</strong> 

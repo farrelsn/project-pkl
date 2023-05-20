@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel ="icon" href = "{{ asset('assets/images/logoKDS.jpeg') }}" />
+    <link rel ="icon" href = "{{ asset('assets/images/logoKDS.png') }}" />
     
     <title>Sistem Inventaris KDS || {{$title}}</title>
   </head> 
@@ -31,7 +31,7 @@
       <div class="card-body">
           <div class="text-center"><h2 class="fw-bold mb-4">KDS Jakarta</h2></div>
           <div class=" text-center"><h3 class="fw-bold mb-4">Sistem Inventaris Barang Kantor</h3></div>
-          <img class="mx-auto d-block" src="{{ asset('assets/images/logoKDS.jpeg') }}" alt="" style="width: 200px; height: 200px">
+          <img class="mx-auto d-block" src="{{ asset('assets/images/logoKDS.png') }}" alt="" style="width: 200px; height: 200px">
           <form method="POST" action="{{ route('login.authenticate') }}">
             @csrf
             <div class="form-floating my-3">

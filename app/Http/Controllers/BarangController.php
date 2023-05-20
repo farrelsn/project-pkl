@@ -64,7 +64,6 @@ class BarangController extends Controller
             'nama_barang' => 'required|unique:tb_barang,nama_barang',
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
-            'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
             'satuan' => 'required',
@@ -75,9 +74,6 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
-            'harga_lama.required' => 'Harga awal tidak boleh kosong',
-            'harga_lama.integer' => 'Harga awal harus berupa bilangan bulat',
-            'harga_lama.min' => 'Harga awal tidak boleh kurang dari 0',
             'harga_baru.required' => 'Harga akhir tidak boleh kosong',
             'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
@@ -113,7 +109,7 @@ class BarangController extends Controller
             'stok' => $request->stok,
             'qtydus' => $request->qtydus,
             'kode_barang' => $kode,
-            'harga_lama' => $request->harga_lama,
+            'harga_lama' => "0",
             'harga_baru' => $request->harga_baru,
             'satuan' => $request->satuan,
         ]);
@@ -189,7 +185,6 @@ class BarangController extends Controller
             'nama_barang' => 'required|unique:tb_barang,nama_barang,'.$barang,
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
-            'harga_lama' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
             'satuan' => 'required',
@@ -200,9 +195,6 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
-            'harga_lama.required' => 'Harga awal tidak boleh kosong',
-            'harga_lama.integer' => 'Harga awal harus berupa bilangan bulat',
-            'harga_lama.min' => 'Harga awal tidak boleh kurang dari 0',
             'harga_baru.required' => 'Harga akhir tidak boleh kosong',
             'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
@@ -219,8 +211,6 @@ class BarangController extends Controller
             //dd($brg);
             $kode = $brg->kode_barang;
         }
-        // if(tb_kategori_barang::where('id', $request->kategori_barang)->exists()){
-        // }
         else{
             $kode_kategori = tb_kategori_barang::where('id', $request->kategori_barang)->first()->id;
             //dd($kode_kategori);
@@ -232,7 +222,14 @@ class BarangController extends Controller
                 $kode = sprintf("%02d", $kode_kategori).'.'. sprintf("%03d", $kode_barang);
             }
         }
-
+        if($brg->harga_baru == $request->harga_baru){
+            $harga_lama = $brg->harga_lama;
+        }
+        else{
+            $harga_lama = $brg->harga_baru;
+        }
+        // if(tb_kategori_barang::where('id', $request->kategori_barang)->exists()){
+        // }
         
 
         $db = tb_barang::where('id', $request->id)->update([
@@ -240,7 +237,7 @@ class BarangController extends Controller
             'kode_barang' => $kode,
             'kategori_barang' => $request->kategori_barang,
             'stok' => $request->stok,
-            'harga_lama' => $request->harga_lama,
+            'harga_lama' => $harga_lama,
             'harga_baru' => $request->harga_baru,
             'qtydus' => $request->qtydus,
             'satuan' => $request->satuan,
@@ -275,15 +272,25 @@ class BarangController extends Controller
 
     public function delete($id)
     {
-        $barang = tb_barang::findOrFail($id);
-        $barang->delete();
+        $barang = tb_barang::find($id);
+        if(!$barang){
+            if(Auth::user()->level == "admin"){
+                return redirect()->route('data_barang_admin')->with(['error' => 'Data tidak ditemukan']);
+            }
+            else if(Auth::user()->level == "user"){
+                return redirect()->route('data_barang_user')->with(['error' => 'Data tidak ditemukan']);
+            }
+        }
+        else{
+            $barang->delete();
+            if(Auth::user()->level == "admin"){
+                return redirect()->route('data_barang_admin')->with(['success' => 'Data berhasil dihapus']);
+            }
+            else if(Auth::user()->level == "user"){
+                return redirect()->route('data_barang_user')->with(['success' => 'Data berhasil dihapus']);
+            }
+        }
 
-        if(Auth::user()->level == "admin"){
-            return redirect()->route('data_barang_admin')->with(['success' => 'Data berhasil dihapus']);
-        }
-        else if(Auth::user()->level == "user"){
-            return redirect()->route('data_barang_user')->with(['success' => 'Data berhasil dihapus']);
-        }
     }
 
     public function export(){
