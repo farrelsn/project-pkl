@@ -31,7 +31,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row mb-4">
-            <form action="{{ route('laporan_pengajuan_barang_user.filter') }}" method="POST">
+            <form action="{{ route('laporan_pengajuan_barang_user.action') }}" method="POST">
               @csrf
               <div class="row g-3">
                 {{-- <div class="col">
@@ -43,7 +43,7 @@
                   <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="{{ $tgl_akhir }}" required>
                 </div> --}}
                 <div class="col">
-                  <select class="form-select" name="bulan" id="bulan" required>
+                  <select class="form-select" name="bulan" id="bulan" >
                     <option value="">Pilih Bulan....</option>
                     <option value="01" {{ $bulan == "01" ? "selected" : "" }} >Januari</option>
                     <option value="02" {{ $bulan == "02" ? "selected" : "" }}>Februari</option>
@@ -60,7 +60,7 @@
                   </select>
                 </div>
                 <div class="col">
-                  <select class="form-select" name="thn" id="thn" required>
+                  <select class="form-select" name="thn" id="thn" >
                     <option value="">Pilih Tahun....</option>
                     @foreach ($tahun as $item)
                       <option value="{{ $item }}" {{ $thn == $item ? "selected" : "" }}>{{ $item }}</option>
@@ -70,16 +70,12 @@
               </div>
               <div class="row mt-3">
                 <div class="col">
-                  <button type="submit" class="btn btn-warning">Filter</button>
+                  <button name="submit" type="submit" class="btn btn-warning" value="filter">Filter</button>
                   <a href="{{ route('laporan_pengajuan_barang_user') }}" class="btn btn-secondary">Reset</a>
-                  @if ($tgl_awal != null && $tgl_akhir != null)
-                    <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel', [$tgl_awal, $tgl_akhir]) }}">Export</a>
-                  @else
-                    <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel') }}">Export</a>
-                  @endif
+                  <button name="submit" type="submit" class="btn btn-dark" value="export">Export</a>
+              </form>
                 </div>
               </div>
-            </form>
           </div>
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">

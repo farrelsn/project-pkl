@@ -5,27 +5,6 @@
  }
 
 
-/*
-.topbar {
-  background-color: var(--bs-primary);
-}
-
-.topbar .logo a{
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 25px;
-  color: #fff;
-}
-
-.topbar .toggle {
-  text-align: right;
-}
-
-.topbar .toggle a{
-  color: #fff;
-  font-size: 2em;
-  display: inline-block;
-}*/
 
 
 :root {
@@ -39,6 +18,7 @@
 
 .sidebar-nav {
   width: var(--offcanvas-width);
+  color: #4f5f6c;
 }
 .sidebar-link {
   display: flex;
@@ -75,9 +55,9 @@
 }
 
 .sidebar-nav .active{
-  background-color: #ece5a7;
+  background-color: #3d4b57;
   text-decoration: none;
-  color: #71655a !important;
+  color: #f9f9f9 !important;
 }
 
 .color1 {
@@ -154,7 +134,7 @@
 }
 
 #sidebar {
-  background-color: #131a58 !important;
+  background-color: #1e2833 !important;
 }
 
 #sidebar .fa-solid {

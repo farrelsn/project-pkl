@@ -114,18 +114,18 @@ Route::group(['middleware' => ['auth']], function () {
         
         // Laporan Barang Masuk
         Route::get('/user/laporan-barang-masuk', [LaporanBarangMasukController::class, 'index'])->name('laporan_barang_masuk_user');
-        Route::post('/user/laporan-barang-masuk', [LaporanBarangMasukController::class, 'filter'])->name('laporan_barang_masuk_user.filter');
+        Route::post('/user/laporan-barang-masuk', [LaporanBarangMasukController::class, 'action'])->name('laporan_barang_masuk_user.action');
 
         // Laporan Pengajuan Barang
         Route::get('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'index'])->name('laporan_pengajuan_barang_user');
-        Route::post('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'filter'])->name('laporan_pengajuan_barang_user.filter');
+        Route::post('/user/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'action'])->name('laporan_pengajuan_barang_user.action');
         Route::get('/user/laporan-pengajuan-barang/{id}/delete', [LaporanPengajuanBarangController::class, 'delete'])->name('laporan_pengajuan_barang_user.delete');
         Route::get('/user/laporan-pengajuan-barang/export', [LaporanPengajuanBarangController::class, 'export'])->name('laporan_pengajuan_barang_user.export');
 
 
         // Laporan Barang Keluar
         Route::get('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'index'])->name('laporan_barang_keluar_user');
-        Route::post('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'filter'])->name('laporan_barang_keluar_user.filter');
+        Route::post('/user/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'action'])->name('laporan_barang_keluar_user.action');
 
     } );
 
@@ -194,16 +194,16 @@ Route::group(['middleware' => ['auth']], function () {
         
         // Laporan Barang Masuk
         Route::get('/admin/laporan-barang-masuk', [LaporanBarangMasukController::class, 'index'])->name('laporan_barang_masuk_admin');
-        Route::post('/admin/laporan-barang-masuk', [LaporanBarangMasukController::class, 'filter'])->name('laporan_barang_masuk_admin.filter');
+        Route::post('/admin/laporan-barang-masuk', [LaporanBarangMasukController::class, 'action'])->name('laporan_barang_masuk_admin.action');
 
         // Laporan Pengajuan Barang
         Route::get('/admin/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'index'])->name('laporan_pengajuan_barang_admin');
-        Route::post('/admin/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'filter'])->name('laporan_pengajuan_barang_admin.filter');
+        Route::post('/admin/laporan-pengajuan-barang', [LaporanPengajuanBarangController::class, 'action'])->name('laporan_pengajuan_barang_admin.action');
         Route::get('/admin/laporan-pengajuan-barang/{id}/delete', [LaporanPengajuanBarangController::class, 'delete'])->name('laporan_pengajuan_barang_admin.delete');
 
         //Laporan Barang Keluar
         Route::get('/admin/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'index'])->name('laporan_barang_keluar_admin');
-        Route::post('/admin/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'filter'])->name('laporan_barang_keluar_admin.filter');
+        Route::post('/admin/laporan-barang-keluar', [LaporanBarangKeluarController::class, 'action'])->name('laporan_barang_keluar_admin.action');
 
         
         // Edit Profil

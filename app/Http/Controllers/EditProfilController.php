@@ -76,13 +76,17 @@ class EditProfilController extends Controller
             $path = public_path('assets/images/foto_profil');
             $file->move($path, $fileName);
         }
+        else{
+            $fileName = Auth::user()->foto;
+        }
 
         if (Auth::user()->level == 'admin'){
             $tb_admin = User::where('username', Auth::user()->username)->first();
 
-            if($tb_admin->foto){
+            if(!$tb_admin->foto == $fileName){
                 File::delete(public_path('assets/images/foto_profil/').$tb_admin->foto);
             }
+
             $tb_admin->update([
                 'nama' => $request->nama,
                 'username' => $request->username,
@@ -96,10 +100,11 @@ class EditProfilController extends Controller
         } 
         else if (Auth::user()->level == 'user'){
             $tb_user = User::where('username', Auth::user()->username)->first();
-            if($tb_user->foto){
-                File::delete(public_path('assets/images/foto_profil').$tb_user->foto);
-                // Storage::delete('public/foto_profil/'.$tb_user->foto);
+
+            if(!$tb_user->foto == $fileName){
+                File::delete(public_path('assets/images/foto_profil/').$tb_user->foto);
             }
+
             $tb_user->update([
                 'nama' => $request->nama,
                 'username' => $request->username,

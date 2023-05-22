@@ -29,7 +29,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row mb-4">
-            <form action="{{ route('laporan_barang_keluar_admin.filter') }}" method="POST">
+            <form action="{{ route('laporan_barang_keluar_admin.action') }}" method="POST">
               @csrf
               <div class="row g-3">
                 <div class="col">

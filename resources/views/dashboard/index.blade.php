@@ -15,7 +15,7 @@
       </button>
     </div>
   @endif
-  <h3>Dashboard</h3>
+  <h3 class="text-uppercase">Dashboard</h3>
   <h5>Selamat datang, {{ $username->nama }}</h5>
   @if (Auth::user()->level == 'admin')
     <div class="dashboard-card color1">

@@ -31,7 +31,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row mb-4">
-            <form action="{{ route('laporan_pengajuan_barang_admin.filter') }}" method="POST">
+            <form action="{{ route('laporan_pengajuan_barang_admin.action') }}" method="POST">
               @csrf
               <div class="row g-3">
                 {{-- <div class="col">
