@@ -69,7 +69,7 @@
                   @foreach ($barang_masuk as $item)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
+                    <td>{{ $item->tanggal_keluar }}</td>
                     <td>{{ $item->barang->kode_barang }}</td>
                     <td>{{ $item->barang->nama_barang }}</td>
                     <td>{{ $item->kategori->kategori_barang }}</td>

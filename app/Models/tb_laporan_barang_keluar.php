@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tb_laporan_pengajuan_barang extends Model
+class tb_laporan_barang_keluar extends Model
 {
     use HasFactory;
-    protected $table = 'tb_laporan_pengajuan';
+    protected $table = 'tb_laporan_barang_keluar';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'tanggal_masuk',
+        'tanggal_keluar',
         'nama_barang',
+        'kategori_barang',
         'stok_awal',
         'stok_akhir',
         'jumlah',
-        'qtydus',
-        'kategori_barang',
-        'harga',
-        'total'
+        'satuan',
     ];
 }

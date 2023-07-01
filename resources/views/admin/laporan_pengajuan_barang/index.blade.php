@@ -34,17 +34,8 @@
             <form action="{{ route('laporan_pengajuan_barang_admin.action') }}" method="POST">
               @csrf
               <div class="row g-3">
-                {{-- <div class="col">
-                  <label for="tanggal_awal" class="col-form-label">Tanggal Awal</label>
-                  <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" value="{{ $tgl_awal }}" required>
-                </div>
                 <div class="col">
-                  <label for="tanggal_akhir" class="col-form-label">Tanggal Akhir</label>
-                  <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="{{ $tgl_akhir }}" required>
-                </div> --}}
-                <div class="col">
-                  <label for="bulan" class="col-form-label">Bulan</label>
-                  <select class="form-select" name="bulan" id="bulan" required>
+                  <select class="form-select" name="bulan" id="bulan" >
                     <option value="">Pilih Bulan....</option>
                     <option value="01" {{ $bulan == "01" ? "selected" : "" }} >Januari</option>
                     <option value="02" {{ $bulan == "02" ? "selected" : "" }}>Februari</option>
@@ -61,8 +52,7 @@
                   </select>
                 </div>
                 <div class="col">
-                  <label for="thn" class="col-form-label">Tahun</label>
-                  <select class="form-select" name="thn" id="thn" required>
+                  <select class="form-select" name="thn" id="thn" >
                     <option value="">Pilih Tahun....</option>
                     @foreach ($tahun as $item)
                       <option value="{{ $item }}" {{ $thn == $item ? "selected" : "" }}>{{ $item }}</option>
@@ -72,44 +62,51 @@
               </div>
               <div class="row mt-3">
                 <div class="col">
-                  <button type="submit" class="btn btn-warning">Filter</button>
+                  <button name="submit" type="submit" class="btn btn-warning" value="filter">Filter</button>
                   <a href="{{ route('laporan_pengajuan_barang_admin') }}" class="btn btn-secondary">Reset</a>
-                  <a class="btn btn-dark" href="{{ route('laporan_pengajuan_barang.excel') }}">Export</a>
+                  <button name="submit" type="submit" class="btn btn-dark" value="export"><i class="bi bi-file-earmark-excel"></i> Export Excel</button>
+              
                 </div>
               </div>
             </form>
           </div>
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class=" text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Nama Barang</th>
-                    <th>Stok Akhir</th>
-                    <th>Jumlah</th>
-                    <th>Satuan Isi</th>
-                    <th>Harga Barang</th>
-                    <th>Jumlah Harga</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($pengajuan_barang as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->stok_akhir }}</td>
-                    <td>{{ $item->qtydus }}</td>
-                    <td>{{ $item->satuan_isi }}</td>
-                    <td>{{ $item->harga }}</td>
-                    <td>{{ $item->total }}</td>
-                    <td><a class="btn btn-danger" href="{{ route('laporan_pengajuan_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+              <thead class=" text-center" style="white-space: nowrap">
+                <tr>
+                  <th>No.</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori Barang</th>
+                  <th>Qty/Dus</th>
+                  <th>Jumlah</th>
+                  <th>Stok Awal</th>
+                  <th>Stok Akhir</th>
+                  <th>Harga Barang</th>
+                  <th>Jumlah Harga</th>
+                  <th>Waktu Konfirmasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap">
+                @foreach ($pengajuan_barang as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->tanggal_masuk }}</td>
+                  <td>{{ $item->nama_barang }}</td>
+                  <td>{{ $item->kategori_barang }}</td>
+                  <td>{{ $item->qtydus }}</td>
+                  <td>{{ $item->jumlah }}</td>
+                  <td>{{ $item->stok_awal}}</td>
+                  <td>{{ $item->stok_akhir }}</td>
+                  <td>{{ $item->harga }}</td>
+                  <td>{{ $item->total }}</td>
+                  <td>{{ $item->created_at }}</td>
+                  <td><a class="btn btn-danger btn-sm" href="{{ route('laporan_pengajuan_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td></td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
           </div>
         
         </div>

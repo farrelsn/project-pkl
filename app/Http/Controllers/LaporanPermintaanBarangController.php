@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 //use Illuminate\Support\Facades\Input;
 //use Symfony\Component\Console\Input\Input as InputInput;
 
-class LaporanPengajuanBarangController extends Controller
+class LaporanPermintaanBarangController extends Controller
 {
     public function index()
     {
@@ -24,39 +24,15 @@ class LaporanPengajuanBarangController extends Controller
         $thn = null;
         if(Auth::user()->level == "admin"){
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('admin.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'admin' => $admin, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
+            return view('admin.laporan_pengajuan_barang.index', ['title' => 'Laporan Permintaan Barang', 'admin' => $admin, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
         }
         else if (Auth::user()->level == "user"){
             $user = User::where('username', Auth::user()->username)->first();
-            return view('user.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'user' => $user, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
+            return view('user.laporan_pengajuan_barang.index', ['title' => 'Laporan Permintaan Barang', 'user' => $user, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
         }
     }
 
     public function action(Request $request){
-        // if($request->input("action") == "filter"){
-        //     $tgl = date('Y-m-d');
-        //     $bulan = $request->bulan;
-        //     $thn = $request->thn;
-        //     $tgl_awal = $thn."-".$bulan."-01";
-        //     $tgl_akhir = $thn."-".$bulan."-31";
-        //     $tahun = ["2021", "2022", "2023", "2024", "2025", "2026", "2027"];
-        //     $pengajuan_barang = tb_laporan_pengajuan_barang::whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])->get();
-        //     if(Auth::user()->level == "admin"){
-        //         $admin = User::where('username', Auth::user()->username)->first();
-        //         return view('admin.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'admin' => $admin, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
-        //     }
-        //     else if (Auth::user()->level == "user"){
-        //         $user = User::where('username', Auth::user()->username)->first();
-        //         return view('user.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'user' => $user, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
-        //     }
-        // }
-        // else if($request->input("action") == "export"){
-        //     $bulan = $request->bulan;
-        //     $thn = $request->thn;
-        //     $tgl_awal = $thn."-".$bulan."-01";
-        //     $tgl_akhir = $thn."-".$bulan."-31";
-        //     return Excel::download(new LaporanPengajuanBarangExport($tgl_awal, $tgl_akhir), 'Laporan Pengajuan Barang.xlsx');
-        // }
         $tgl = date('Y-m-d');
         $bulan = $request->bulan;
         $thn = $request->thn;
@@ -74,25 +50,24 @@ class LaporanPengajuanBarangController extends Controller
             $pengajuan_barang = tb_laporan_pengajuan_barang::whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])->get();
             if(Auth::user()->level == "admin"){
                 $admin = User::where('username', Auth::user()->username)->first();
-                return view('admin.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'admin' => $admin, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
+                return view('admin.laporan_pengajuan_barang.index', ['title' => 'Laporan Permintaan Barang', 'admin' => $admin, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
             }
             else if (Auth::user()->level == "user"){
                 $user = User::where('username', Auth::user()->username)->first();
-                return view('user.laporan_pengajuan_barang.index', ['title' => 'Laporan Pengajuan Barang', 'user' => $user, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
+                return view('user.laporan_pengajuan_barang.index', ['title' => 'Laporan Permintaan Barang', 'user' => $user, 'pengajuan_barang' => $pengajuan_barang, 'tgl' => $tgl, 'tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'tahun' => $tahun, 'bulan' => $bulan, 'thn' => $thn]);
             }
         }
         else if($request->submit == "export"){
-            //dd($tgl_awal, $tgl_akhir);
             if($bulan == null && $thn == null){
                 $tgl_awal = null;
                 $tgl_akhir = null;
                 if(Auth::user()->level == "admin"){
                     $admin = User::where('username', Auth::user()->username)->first();
-                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Pengajuan_Barang.xlsx');
+                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Permintaan_Barang.xlsx');
                 }
                 else if (Auth::user()->level == "user"){
                     $user = User::where('username', Auth::user()->username)->first();
-                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Pengajuan_Barang.xlsx');
+                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Permintaan_Barang.xlsx');
                 }
             }
             else if($bulan == null && $thn != null){
@@ -108,11 +83,11 @@ class LaporanPengajuanBarangController extends Controller
                 //$excel = new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir);
                 if(Auth::user()->level == "admin"){
                     $admin = User::where('username', Auth::user()->username)->first();
-                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Pengajuan_Barang_'.$bulan.'_'.$thn.'.xlsx');
+                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Permintaan_Barang_'.$bulan.'_'.$thn.'.xlsx');
                 }
                 else if (Auth::user()->level == "user"){
                     $user = User::where('username', Auth::user()->username)->first();
-                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Pengajuan_Barang_'.$bulan.'_'.$thn.'.xlsx');
+                    return Excel::download(new LaporanPengajuanBarangExport($tgl_awal,$tgl_akhir), 'Laporan_Permintaan_Barang_'.$bulan.'_'.$thn.'.xlsx');
                 }
             }
         }

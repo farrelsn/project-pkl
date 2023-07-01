@@ -34,14 +34,6 @@
             <form action="{{ route('laporan_pengajuan_barang_user.action') }}" method="POST">
               @csrf
               <div class="row g-3">
-                {{-- <div class="col">
-                  <label for="tanggal_awal" class="col-form-label">Tanggal Awal</label>
-                  <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" value="{{ $tgl_awal }}" required>
-                </div>
-                <div class="col">
-                  <label for="tanggal_akhir" class="col-form-label">Tanggal Akhir</label>
-                  <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="{{ $tgl_akhir }}" required>
-                </div> --}}
                 <div class="col">
                   <select class="form-select" name="bulan" id="bulan" >
                     <option value="">Pilih Bulan....</option>
@@ -72,42 +64,49 @@
                 <div class="col">
                   <button name="submit" type="submit" class="btn btn-warning" value="filter">Filter</button>
                   <a href="{{ route('laporan_pengajuan_barang_user') }}" class="btn btn-secondary">Reset</a>
-                  <button name="submit" type="submit" class="btn btn-dark" value="export">Export</a>
-              </form>
+                  <button name="submit" type="submit" class="btn btn-dark" value="export"><i class="bi bi-file-earmark-excel"></i> Export Excel</button>
+              
                 </div>
               </div>
+            </form>
           </div>
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class=" text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Nama Barang</th>
-                    <th>Stok Akhir</th>
-                    <th>Jumlah</th>
-                    <th>Satuan Isi</th>
-                    <th>Harga Barang</th>
-                    <th>Jumlah Harga</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($pengajuan_barang as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->stok_akhir }}</td>
-                    <td>{{ $item->qtydus }}</td>
-                    <td>{{ $item->satuan_isi }}</td>
-                    <td>{{ $item->harga }}</td>
-                    <td>{{ $item->total }}</td>
-                    <td><a class="btn btn-danger" href="{{ route('laporan_pengajuan_barang_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+              <thead class=" text-center" style="white-space: nowrap">
+                <tr>
+                  <th>No.</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori Barang</th>
+                  <th>Qty/Dus</th>
+                  <th>Jumlah</th>
+                  <th>Stok Awal</th>
+                  <th>Stok Akhir</th>
+                  <th>Harga Barang</th>
+                  <th>Jumlah Harga</th>
+                  <th>Waktu Konfirmasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap">
+                @foreach ($pengajuan_barang as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->tanggal_masuk }}</td>
+                  <td>{{ $item->nama_barang }}</td>
+                  <td>{{ $item->kategori_barang }}</td>
+                  <td>{{ $item->qtydus }}</td>
+                  <td>{{ $item->jumlah }}</td>
+                  <td>{{ $item->stok_awal}}</td>
+                  <td>{{ $item->stok_akhir }}</td>
+                  <td>{{ $item->harga }}</td>
+                  <td>{{ $item->total }}</td>
+                  <td>{{ $item->created_at }}</td>
+                  <td><a class="btn btn-danger btn-sm" href="{{ route('laporan_pengajuan_barang_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td></td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
           </div>
         
         </div>

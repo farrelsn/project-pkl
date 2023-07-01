@@ -32,49 +32,52 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class=" text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Nama Barang</th>
-                    <th>Stok Akhir</th>
-                    <th>Jumlah</th>
-                    <th>Satuan Isi</th>
-                    <th>Harga Barang</th>
-                    <th>Jumlah Harga</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($pengajuan_barang as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->barang->nama_barang }}</td>
-                    <td>{{ $item->barang->stok }}</td>
-                    <td>{{ $item->qtydus }}</td>
-                    <td>{{ $item->barang->qtydus }}</td>
-                    <td>{{ $item->barang->harga_baru }}</td>
-                    <td>{{ $item->qtydus * $item->barang->harga_baru }}</td>
-                    <td class="text-center">
-                      <a class="btn btn-success mb" href="{{ route('pengajuan_barang_admin.storelaporan', [$item->id]) }}" onclick="return confirm('Konfirmasi Beli Barang?')"><i class="fa-solid fa-check"></i></a>
-                      <a class="btn btn-danger" href="{{ route('pengajuan_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th colspan="7" style="text-align:center">Jumlah Harga Barang:</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
-            </table>
+              <thead class=" text-center" style="white-space: nowrap">
+                <tr>
+                  <th>No.</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori Barang</th>
+                  <th>Qty/Dus </th>
+                  <th>Jumlah</th>
+                  <th>Stok Awal</th>
+                  <th>Stok Akhir</th>
+                  <th>Harga Barang</th>
+                  <th>Jumlah Harga</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap">
+                @foreach ($pengajuan_barang as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->tanggal_masuk }}</td>
+                  <td>{{ $item->barang->nama_barang }}</td>
+                  <td>{{ $item->kategori->kategori_barang }}</td>
+                  <td>{{ $item->barang->qtydus }}</td>
+                  <td>{{ $item->jumlah }}</td>
+                  <td>{{ $item->barang->stok }}</td>
+                  <td>{{ $item->barang->stok + ($item->barang->qtydus * $item->jumlah)}}</td>
+                  <td>{{ $item->barang->harga_baru }}</td>
+                  <td>{{ $item->jumlah * $item->barang->harga_baru }}</td>
+                  <td class="text-center">
+                    <a class="btn btn-success btn-sm" href="{{ route('pengajuan_barang_admin.storelaporan', [$item->id]) }}" onclick="return confirm('Konfirmasi Beli Barang?')"><i class="fa-solid fa-check"></i></a>
+                    <a class="btn btn-danger btn-sm" href="{{ route('pengajuan_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="bi bi-trash-fill"></i></a></td>
+                </tr>
+                @endforeach
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="9" style="text-align:right">Jumlah Harga Barang:</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+          </table>
           </div>
         
         </div>
       </div>
       <div class="d-flex justify-content-between mt-2">
-        {{-- <a type="button" class="btn btn-dark" href="{{ route("pengajuan_barang.excel") }}">Export</a> --}}
       @else
       <div class="alert alert-warning" role="alert">
         <strong>Data {{ $title }} Belum Tersedia.</strong> 
@@ -89,7 +92,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Pengajuan Barang</h5>
+                    <h5 class="modal-title">Tambah Permintaan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="showModalTambahBarang">
@@ -102,7 +105,7 @@
                                   <select class="form-select" name="nama_barang" id="nama_barang">
                                     <option value="" selected>Pilih Nama Barang....</option>
                                     @foreach ($barang as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->nama_barang }} | Stok = {{ $item->stok }} | Qty/Dus = {{ $item->qtydus }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -115,8 +118,8 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="qtydus" class="col-form-label">Jumlah</label>
-                                  <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
+                                  <label for="jumlah" class="col-form-label">Jumlah</label>
+                                  <input type="number" class="form-control" id="jumlah" name="jumlah" value="" required>
                               </div>
                             </div>
                             {{-- <div class="form-group row" id="satuan_isi_container" style="display:none; ">
@@ -137,6 +140,27 @@
       </div>
     
     <script>
+
+      // Kali satuan isi dengan jumlah dus
+      // $(document).ready(function(){
+      //   $('#qtydus').keyup(function(){
+      //     var qtydus = $('#qtydus').val();
+      //     var satuan_isi = $('#satuan_isi').val();
+      //     var hasil = qtydus * satuan_isi;
+      //     $('#qty').val(hasil);
+      //   });
+      // });
+      // Tampilkan satuan isi jika barang yang dipilih adalah dus
+      // $(document).ready(function(){
+      //   $('#nama_barang').change(function(){
+      //     var nama_barang = $('#nama_barang').val();
+      //     if(nama_barang == 1){
+      //       $('#satuan_isi_container').show();
+      //     }else{
+      //       $('#satuan_isi_container').hide();
+      //     }
+      //   });
+      // });
 
     </script>
     {{-- </div>

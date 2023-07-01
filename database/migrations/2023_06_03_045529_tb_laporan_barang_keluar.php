@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_laporan_pengajuan', function (Blueprint $table) {
+        Schema::create('tb_laporan_barang_keluar', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal_masuk');
+            $table->date('tanggal_keluar');
             $table->string('nama_barang');
+            $table->string('kategori_barang');
             $table->unsignedInteger('stok_awal');
             $table->unsignedInteger('stok_akhir');
             $table->unsignedInteger('jumlah');
-            $table->string('kategori_barang');
-            $table->unsignedInteger('qtydus');
-            $table->unsignedInteger('harga');
-            $table->unsignedInteger('total');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_laporan_pengajuan');
+        Schema::dropIfExists('tb_laporan_barang_keluar');
     }
 };

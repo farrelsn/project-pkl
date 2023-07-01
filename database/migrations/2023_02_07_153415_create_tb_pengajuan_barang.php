@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_masuk');
             $table->foreignId('nama_barang')->references('id')->on('tb_barang')->onDelete('cascade');
+            $table->foreignId('kategori_barang')->references('id')->on('tb_kategori_barang')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('qtydus');
-            $table->unsignedInteger('satuan_isi');
+            $table->unsignedInteger('jumlah');
             $table->unsignedInteger('harga');
         });
     }

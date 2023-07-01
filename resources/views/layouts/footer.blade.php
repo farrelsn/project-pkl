@@ -39,14 +39,14 @@
     
                 // Total over this page
                 pageTotal = api
-                    .column(7, { page: 'current' })
+                    .column(9, { page: 'current' })
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
     
                 // Update footer
-                $(api.column(7).footer()).html(pageTotal + ' ( ' + total + ' total)');
+                $(api.column(9).footer()).html(pageTotal );//+ ' ( ' + total + ' total)');
             },
         });
     });

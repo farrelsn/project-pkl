@@ -30,31 +30,31 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Pegawai</th>
-                    <th>Jabatan</th>
-                    <th>Bagian</th>
-                    <th>Departemen</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($pegawai as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->id_jabatan->nama_jabatan }}</td>
-                    <td>{{ $item->bagian }}</td>
-                    <td>{{ $item->departemen }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-dark" href="{{ route('pegawai_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="btn btn-danger" href="{{ route('pegawai_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+              <thead class="text-center" style="white-space: nowrap;">
+                <tr>
+                  <th>No.</th>
+                  <th>Pegawai</th>
+                  <th>Jabatan</th>
+                  <th>Bagian</th>
+                  <th>Departemen</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap;">
+                @foreach ($pegawai as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->id_jabatan->nama_jabatan }}</td>
+                  <td>{{ $item->bagian }}</td>
+                  <td>{{ $item->departemen }}</td>
+                  <td class="text-center">
+                      <a class="btn btn-dark btn-sm" href="{{ route('pegawai_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a class="btn btn-danger btn-sm" href="{{ route('pegawai_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
           </div>
         
         </div>

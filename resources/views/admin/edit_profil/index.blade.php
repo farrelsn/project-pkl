@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <div class="text-center">
                         <div class="container">
-                            <img id="pp" style="width: 200px; height: 200px" class="border border-white border-3 rounded-circle" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="...">
+                            <img id="pp" style="width: 200px; height: 200px" class="border border-white border-3 rounded-circle" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="..." onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';">
                         </div>
                         <div class="form-group">
                             <label for="foto-profil" class="form-label">Silahkan masukkan foto profil</label>

@@ -17,15 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('kode_barang')->nullable()->unique();
             $table->foreignId('kategori_barang')->references('id')->on('tb_kategori_barang')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreignId('lokasi')->constrained('tb_lokasi')->onDelete('cascade');
+            $table->unsignedInteger('qtydus')->default(1);
             $table->string('nama_barang');
-            //$table->string('kategori_barang');
-            //$table->enum('lantai',['1','2'])->nullable();
             $table->unsignedInteger('stok')->default(0);
             $table->unsignedInteger('harga_lama')->default(0);
             $table->unsignedInteger('harga_baru')->default(0);
-            $table->unsignedInteger('qtydus')->default(0);
-            $table->foreignId('satuan')->references('id')->on('tb_satuan')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

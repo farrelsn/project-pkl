@@ -21,21 +21,21 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center">
+                <thead class="text-center" style="white-space: nowrap">
                   <tr>
                     <th>No.</th>
                     <th>Nama Jabatan</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style="white-space: nowrap">
                   @foreach ($jabatan as $item)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama_jabatan }}</td>
                     <td class="text-center">
-                        <a class="btn btn-dark" href="{{ route('jabatan_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="btn btn-danger" href="{{ route('jabatan_user.delete', [$item->id]) }}" onclick="return confirm('Data Pegawai dengan jabatan ini akan dihapus. Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
+                        <a class="btn btn-dark btn-sm" href="{{ route('jabatan_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger btn-sm" href="{{ route('jabatan_user.delete', [$item->id]) }}" onclick="return confirm('Data Pegawai dengan jabatan ini akan dihapus. Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
                   </tr>
                   @endforeach
                 </tbody>

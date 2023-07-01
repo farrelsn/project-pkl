@@ -31,9 +31,9 @@ class LaporanPengajuanBarangExport implements FromCollection, WithHeadings, Shou
     public function collection()
     {
         if ($this->tgl_awal == null && $this->tgl_akhir == null)
-            return tb_laporan_pengajuan_barang::query()->get(['tanggal_masuk', 'nama_barang', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total'])->sortBy('tanggal_masuk');
+            return tb_laporan_pengajuan_barang::query()->get(['tanggal_masuk', 'nama_barang', 'kategori_barang', 'stok_awal', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total', 'created_at'])->sortBy('tanggal_masuk');
         else if ($this->tgl_awal != null && $this->tgl_akhir != null)
-            return tb_laporan_pengajuan_barang::query()->whereBetween('tanggal_masuk', [$this->tgl_awal, $this->tgl_akhir])->get(['tanggal_masuk', 'nama_barang', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total'])->sortBy('tanggal_masuk');
+            return tb_laporan_pengajuan_barang::query()->whereBetween('tanggal_masuk', [$this->tgl_awal, $this->tgl_akhir])->get(['tanggal_masuk', 'nama_barang', 'kategori_barang', 'stok_awal', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total', 'created_at'])->sortBy('tanggal_masuk');
         //return tb_laporan_pengajuan_barang::select('tanggal_masuk', 'nama_barang', 'stok_akhir', 'qtydus', 'satuan_isi','harga','total')->get();
     }
 
@@ -47,11 +47,14 @@ class LaporanPengajuanBarangExport implements FromCollection, WithHeadings, Shou
         return [
             'Tanggal Masuk',
             'Nama Barang',
+            'Kategori Barang',
+            'Stok Awal',
             'Stok Akhir',
             'Qty Dus',
             'Satuan Isi',
             'Harga Barang',
             'Jumlah Harga',
+            'Waktu Konfirmasi'
         ];
     }
 }

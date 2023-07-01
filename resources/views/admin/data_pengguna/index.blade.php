@@ -46,10 +46,10 @@
                     <td>{{ $item->nama}}</td>
                     <td>{{ $item->username }}</td>
                     <td>{{ $item->level }}</td>
-                    <td class="text-center"><img style="border-radius: 50%" width="30px" height="30px" src="{{ $item->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $item->foto) }}" alt="user"></td>
+                    <td class="text-center"><img style="border-radius: 50%" width="30px" height="30px" src="{{ $item->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $item->foto) }}" alt="user" onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';"></td>
                     @if (Auth::user()->id != $item->id)
                       <td class="text-center">
-                        <a href="{{ route('data_pengguna_admin.delete', $item->id) }}" class="btn btn-danger" onclick="return confirm('Apa anda yakin ingin menghapus pengguna ini?')"><i class="bi bi-trash"></i></a>
+                        <a href="{{ route('data_pengguna_admin.delete', $item->id) }}" class="btn btn-sm btn-danger " onclick="return confirm('Apa anda yakin ingin menghapus pengguna ini?')"><i class="fa-solid fa-trash-can"></i></a>
                       </td>
                     @else
                       <td class="text-center">

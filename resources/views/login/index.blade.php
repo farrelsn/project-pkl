@@ -23,15 +23,15 @@
       </button>
     </div>
     @endif
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh ; ">
       <div class="card col-sm-4 rounded shadow p-3 bg-light rounded" style="
       background-color: #fff !important; 
       color:black;
       ">
       <div class="card-body">
-          <div class="text-center"><h2 class="fw-bold mb-4">KDS Jakarta</h2></div>
-          <div class=" text-center"><h3 class="fw-bold mb-4">Sistem Inventaris Barang Kerja</h3></div>
-          <img class="mx-auto d-block" src="{{ asset('assets/images/logoKDS.png') }}" alt="" style="width: 200px; height: 200px">
+          {{-- <div class="text-center text-uppercase fw-bold"><h2 class="fw-bolder mb-4">KDS Jakarta</h2></div> --}}
+          <img class="mx-auto d-block mb-4" src="{{ asset('assets/images/logoKDS.png') }}" alt="" style="width: 200px; height: 200px">
+          <div class=" text-center text-uppercase fw-bold"><h3 class="fw-bolder ">Sistem Inventaris Barang Kerja</h3></div>
           <form method="POST" action="{{ route('login.authenticate') }}">
             @csrf
             <div class="form-floating my-3">

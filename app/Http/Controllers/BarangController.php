@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Models\tb_admin;
 use App\Models\tb_barang;
 use App\Models\tb_lokasi;
-use App\Models\tb_satuan;
 use App\Models\tb_user;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,16 +27,16 @@ class BarangController extends Controller
     public function index()
     {
         $barang = tb_barang::all();
-        $kategori_barang = tb_kategori_barang::all();
-        $satuan = tb_satuan::all();
+        $kategori_barang = tb_kategori_barang::all()->sortByDesc('id');
+        $kategori_barang = $kategori_barang->reverse();
         if (Auth::user()->level == 'admin') {
             $admin = User::where('username', Auth::user()->username)->first();
-            return view('admin.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang, 'satuan' => $satuan]);
+            return view('admin.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategori_barang]);
         } 
         else if (Auth::user()->level == 'user'){
             $user = User::where('username', Auth::user()->username)->first();
             //dd($kategori_barang);
-            return view('user.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang, 'satuan' => $satuan]);
+            return view('user.barang.index', ['title' => 'Data Barang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategori_barang]);
         }
     }
 
@@ -66,7 +65,6 @@ class BarangController extends Controller
             'stok' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
-            'satuan' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -79,7 +77,6 @@ class BarangController extends Controller
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
             'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
-            'satuan.required' => 'Satuan tidak boleh kosong',
         ]);
 
 
@@ -111,7 +108,6 @@ class BarangController extends Controller
             'kode_barang' => $kode,
             'harga_lama' => "0",
             'harga_baru' => $request->harga_baru,
-            'satuan' => $request->satuan,
         ]);
 
         //dd($db);
@@ -160,15 +156,13 @@ class BarangController extends Controller
             $barang = tb_barang::where('id', $id)->first();
             $user = User::where('username', Auth::user()->username)->first();
             $kategoribarang = tb_kategori_barang::all();
-            $satuan = tb_satuan::all();
-            return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang, 'satuan' => $satuan]);
+            return view('user.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'user' => $user, 'kategori_barang' => $kategoribarang]);
         }
         else if(Auth::user()->level == "admin"){
             $barang = tb_barang::where('id', $id)->first();
             $admin = User::where('username', Auth::user()->username)->first();
             $kategoribarang = tb_kategori_barang::all();
-            $satuan = tb_satuan::all();
-            return view('admin.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategoribarang, 'satuan' => $satuan]);
+            return view('admin.barang.edit', ['title' => 'Data Gudang', 'barang' => $barang, 'admin' => $admin, 'kategori_barang' => $kategoribarang]);
         }
     }
 
@@ -187,7 +181,6 @@ class BarangController extends Controller
             'stok' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
             'qtydus' => 'integer|min:0',
-            'satuan' => 'required',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -200,7 +193,6 @@ class BarangController extends Controller
             'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
             'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
-            'satuan.required' => 'Satuan tidak boleh kosong',
         ]);
 
         // dd($request);
@@ -240,7 +232,6 @@ class BarangController extends Controller
             'harga_lama' => $harga_lama,
             'harga_baru' => $request->harga_baru,
             'qtydus' => $request->qtydus,
-            'satuan' => $request->satuan,
         ]);
 
         if(Auth::user()->level == "admin"){

@@ -21,7 +21,7 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center">
+                <thead class="text-center" style="white-space: nowrap;">
                   <tr>
                     <th>No.</th>
                     <th>Kategori Barang</th>
@@ -30,12 +30,12 @@
                 </thead>
                 <tbody>
                   @foreach ($kategori_barang as $item)
-                  <tr>
+                  <tr style="white-space: nowrap;">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->kategori_barang }}</td>
                     <td class="text-center">
-                      <a class="btn btn-dark" href="{{ route('kategori_barang_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <a class="btn btn-danger" href="{{ route('kategori_barang_user.delete', [$item->id]) }}" onclick="return confirm('Semua data barang dengan kategori ini akan ikut dihapus. Apa anda yakin ingin menghapus kategori ini?')"><i class="fa-solid fa-trash-can"></i></a></td>
+                      <a class="btn btn-dark btn-sm" href="{{ route('kategori_barang_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a class="btn btn-danger btn-sm" href="{{ route('kategori_barang_user.delete', [$item->id]) }}" onclick="return confirm('Semua data barang dengan kategori ini akan ikut dihapus. Apa anda yakin ingin menghapus kategori ini?')"><i class="fa-solid fa-trash-can"></i></a></td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -62,7 +62,7 @@ class GantiPasswordController extends Controller
                 $user->update([
                     'password' => Hash::make($request->password_new)
                 ]);
-                return redirect()->back()->with('success', 'Password berhasil diganti');
+                return redirect()->route('dashboard')->with('success', 'Password berhasil diubah');
             }else{
                 return redirect()->back()->with('error', 'Password baru dan konfirmasi password tidak sama');
             }

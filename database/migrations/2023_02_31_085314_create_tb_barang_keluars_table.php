@@ -20,12 +20,7 @@ return new class extends Migration
             // $table->string('nama_barang');
             $table->foreignId('kategori_barang')->references('id')->on('tb_kategori_barang')->onDelete('cascade')->onUpdate('cascade');
             //$table->string('kategori_barang');
-            $table->string('stok_awal');
             $table->string('jumlah_barang');
-            $table->string('stok_akhir');
-            //$table->string('pemakai');
-            $table->foreignId('pemakai')->nullable()->references('id')->on('tb_pegawai')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('lokasi')->nullable()->references('id')->on('tb_lokasi')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tanggal_keluar');
         });
     }

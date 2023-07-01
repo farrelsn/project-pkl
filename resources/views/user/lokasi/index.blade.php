@@ -30,27 +30,27 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th>Lokasi</th>
-                    <th>Lantai</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($lokasi as $item)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_lokasi }}</td>
-                    <td>{{ $item->lantai }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-dark" href="{{ route('lokasi_user.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="btn btn-danger" href="{{ route('lokasi_user.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+              <thead class="text-center" style="white-space: nowrap">
+                <tr>
+                  <th>No.</th>
+                  <th>Lokasi</th>
+                  <th>Lantai</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap">
+                @foreach ($lokasi as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->nama_lokasi }}</td>
+                  <td>{{ $item->lantai }}</td>
+                  <td class="text-center">
+                      <a class="btn btn-dark btn-sm" href="{{ route('lokasi_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a class="btn btn-danger btn-sm" href="{{ route('lokasi_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></button></td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
           </div>
         
         </div>

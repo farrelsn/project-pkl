@@ -30,38 +30,27 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center">
+                <thead class="text-center" style="white-space: nowrap;">
                   <tr>
-                    <th rowspan="2">No.</th>
-                    <th rowspan="2">Kode Barang</th>
-                    <th rowspan="2">Nama Barang</th>
-                    <th rowspan="2">Kategori Barang</th>
-                    <th class="text-center" colspan="{{ $satuan->count() }}">Qty</th>
-                    <th rowspan="2">Harga Lama</th>
-                    <th rowspan="2">Harga Baru</th>
-                    <th rowspan="2">Stok Satuan</th>
-                    <th rowspan="2">Aksi</th>
-                  </tr>
-                  <tr>
-                    @foreach ($satuan as $item)
-                    <th>{{ $item->nama_satuan }}</th>
-                    @endforeach
+                    <th>No.</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori Barang</th>
+                    <th class="text-center">Qty/Dus</th>
+                    <th>Harga Lama</th>
+                    <th>Harga Baru</th>
+                    <th>Stok Satuan</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($barang as $item)
-                  <tr>
+                  <tr style="white-space: nowrap;">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->kode_barang }}</td>
                     <td>{{ $item->nama_barang }}</td>
                     <td>{{ $item->kategori->kategori_barang }}</td>
-                    @foreach ($satuan as $sat)
-                      @if ($item->satuan == $sat->id)
-                      <td>{{ $item->qtydus }}</td>
-                      @else
-                      <td>-</td>
-                      @endif
-                    @endforeach
+                    <td class="text-center">{{ $item->qtydus }}</td>
                     @if($item->harga_lama == 0)
                     <td>-</td>
                     @else
@@ -72,10 +61,10 @@
                     @else
                     <td>{{ $item->rupiah($item->harga_baru) }}</td>
                     @endif
-                    <td>{{ $item->stok }}</td>
+                    <td class="text-center">{{ $item->stok }}</td>
                     <td class="text-center">
-                      <a class="btn btn-dark" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <a class="btn btn-danger" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
+                      <a class="btn btn-dark btn-sm" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a class="btn btn-danger btn-sm" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -134,18 +123,7 @@
                             </div>
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="satuan" class="col-form-label">Satuan</label>
-                                  <select class="form-select" name="satuan" id="satuan">
-                                    <option value="">Pilih Satuan....</option>
-                                    @foreach ($satuan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_satuan }}</option>
-                                    @endforeach
-                                  </select>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <div class="col-12">
-                                  <label for="qtydus" class="col-form-label">Qty</label>
+                                  <label for="qtydus" class="col-form-label">Qty/Dus</label>
                                   <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
                               </div>
                             </div>

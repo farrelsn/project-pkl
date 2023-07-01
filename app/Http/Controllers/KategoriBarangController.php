@@ -18,7 +18,8 @@ class KategoriBarangController extends Controller
      */
     public function index()
     {
-        $kategori_barang = tb_kategori_barang::all();
+        $kategori_barang = tb_kategori_barang::all()->sortByDesc('id');
+        $kategori_barang = $kategori_barang->reverse();
         if(Auth::user()->level == "admin"){
             $admin = User::where('username', Auth::user()->username)->first();
             return view('admin.kategori_barang.index', ['title' => 'Kategori Barang', 'kategori_barang' => $kategori_barang, 'admin' => $admin]);
@@ -92,13 +93,12 @@ class KategoriBarangController extends Controller
      */
     public function edit(tb_kategori_barang $tb_kategori_barang, $id)
     {
+        $kategori_barang = tb_kategori_barang::where('id', $id)->first();
         if(Auth::user()->level == "user"){
-            $kategori_barang = tb_kategori_barang::where('id', $id)->first();
             $user = User::where('username', Auth::user()->username)->first();
             return view('user.kategori_barang.edit', ['title' => 'Kategori Barang', 'kategori_barang' => $kategori_barang, 'user' => $user]);
         }
         else if(Auth::user()->level == "admin"){
-            $kategori_barang = tb_kategori_barang::where('id', $id)->first();
             $admin = User::where('username', Auth::user()->username)->first();
             return view('admin.kategori_barang.edit', ['title' => 'Kategori Barang', 'kategori_barang' => $kategori_barang, 'admin' => $admin]);
         }
@@ -116,6 +116,21 @@ class KategoriBarangController extends Controller
         $request->validate([
             'kategori_barang' => 'required',
         ]);
+
+        if(tb_kategori_barang::where('id', $request->id)->first()){
+            if(tb_kategori_barang::where('kategori_barang', $request->kategori_barang)->first()){
+                if(Auth::user()->level == "user"){
+                    return redirect()->route('kategori_barang_user')->with('success', 'Data berhasil diubah');
+                }
+                else if (Auth::user()->level == "admin"){
+                    return redirect()->route('kategori_barang_admin')->with('success', 'Data berhasil diubah');
+                }
+            }
+        }
+
+        else if(tb_kategori_barang::where('kategori_barang', $request->kategori_barang)->first()){
+            return redirect()->back()->with('error', 'Kategori barang sudah ada');
+        }
 
         $db = tb_kategori_barang::where('id', $request->id)->update([
             'kategori_barang' => $request->kategori_barang,

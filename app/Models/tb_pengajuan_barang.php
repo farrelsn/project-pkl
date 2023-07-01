@@ -13,8 +13,9 @@ class tb_pengajuan_barang extends Model
     protected $fillable = [
         'nama_barang',
         'tanggal_masuk',
+        'kategori_barang',
         'qtydus',
-        'satuan_isi',
+        'jumlah',
         'harga',
     ];
     public $timestamps = false;
@@ -22,6 +23,12 @@ class tb_pengajuan_barang extends Model
     public function barang(){
         return $this->belongsTo(tb_barang::class, 'nama_barang', 'id');
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
+    }
+
 
     // public function rupiah($nilai)
     // {

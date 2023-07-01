@@ -14,12 +14,10 @@ class tb_barang_keluar extends Model
     protected $fillable = [
         'nama_barang',
         'kategori_barang',
-        'stok_awal',
+        //'stok_awal',
         'jumlah_barang',
-        'stok_akhir',
+        //'stok_akhir',
         'tanggal_keluar',
-        'pemakai',
-        'lokasi'
         //'keterangan',
     ];
 
@@ -31,16 +29,6 @@ class tb_barang_keluar extends Model
     public function kategori()
     {
         return $this->belongsTo(tb_kategori_barang::class, 'kategori_barang', 'id');
-    }
-
-    public function pegawai()
-    {
-        return $this->belongsTo(tb_pegawai::class, 'pemakai', 'id');
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(tb_lokasi::class, 'lokasi', 'id');
     }
 
 

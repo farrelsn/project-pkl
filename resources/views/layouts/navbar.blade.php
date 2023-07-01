@@ -36,10 +36,10 @@
             >
             
             @if (Auth::user()->level == 'admin')
-              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user">
+              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user" onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';">
 
             @elseif (Auth::user()->level == 'user')
-              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user">
+              <img style="border-radius: 50%" width="30px" height="30px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user" onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';">
             @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -47,10 +47,10 @@
                 <div class="mb-2">
                   
                   @if (Auth::user()->level == 'admin')
-                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user">
+                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $admin->foto == null ? asset('assets/images/default.jpg') : asset('assets/images/foto_profil/'. $admin->foto) }}" alt="user" onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';">
 
                   @elseif (Auth::user()->level == 'user')
-                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user">
+                    <img style="border-radius: 50%" width="60px" height="60px" src="{{ $user->foto == null ? asset('assets/images/default.jpg') :  asset('assets/images/foto_profil/'. $user->foto) }}" alt="user" onerror="this.onerror=null;this.src='{{asset('assets/images/default.jpg')}}';">
                   @endif
                 </div>
                 <h6 class="my-0">{{ Auth::user()->username }}</h6>
