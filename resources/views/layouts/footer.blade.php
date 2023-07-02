@@ -6,21 +6,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
     <script>
-      // $(document).ready( function () {
-      //     $('#example').DataTable();
-      // } );
+      $(document).ready( function () {
+          $('#example').DataTable();
+      } );
 
-      // $('#myReportTable').DataTable( {
-      //   drawCallback: function () {
-      //     var api = this.api();
-      //     $( api.table().footer() ).html(
-      //       api.column(3).data().sum()
-      //     );
-      //   }
-      // } );
+    //   $('#myReportTable').DataTable( {
+    //     drawCallback: function () {
+    //       var api = this.api();
+    //       $( api.table().footer() ).html(
+    //         api.column(3).data().sum()
+    //       );
+    //     }
+    //   } );
 
       $(document).ready(function () {
-        $('#example').DataTable({
+        $('#pemakaian_barang').DataTable({
             footerCallback: function (row, data, start, end, display) {
                 var api = this.api();
     
@@ -31,7 +31,7 @@
     
                 // Total over all pages
                 total = api
-                    .column(7)
+                    .column(9)
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);

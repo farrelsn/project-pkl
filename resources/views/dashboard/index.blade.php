@@ -69,10 +69,10 @@
       </a>
     </div>
     <div class="dashboard-card color4">
-      <a href="{{ route('pengajuan_barang_admin') }}">
+      <a href="{{ route('permintaan_barang_admin') }}">
         <div class="float-left">
           <h3>
-            <span class="count">{{ $pengajuan_barang->count() }}</span>
+            <span class="count">{{ $permintaan_barang->count() }}</span>
           </h3>
           <p>Permintaan Barang</p>
         </div>
@@ -82,12 +82,12 @@
       </a>
     </div>
     <div class="dashboard-card color5">
-      <a href="{{ route('barang_keluar_admin') }}">
+      <a href="{{ route('pemakaian_barang_admin') }}">
       
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
-            <span class="count">{{ $barang_keluar->count() }}</span>
+            <span class="count">{{ $pemakaian_barang->count() }}</span>
           </h3>
           <p>Pemakaian Barang</p>
         </div>
@@ -122,10 +122,10 @@
       </a>
     </div>
     <div class="dashboard-card color4">
-      <a href="{{ route('pengajuan_barang_user') }}">
+      <a href="{{ route('permintaan_barang_user') }}">
         <div class="float-left">
           <h3>
-            <span class="count">{{ $pengajuan_barang->count() }}</span>
+            <span class="count">{{ $permintaan_barang->count() }}</span>
           </h3>
           <p>Permintaan Barang</p>
         </div>
@@ -135,12 +135,12 @@
       </a>
     </div>
     <div class="dashboard-card color5">
-      <a href="{{ route('barang_keluar_user') }}">
+      <a href="{{ route('pemakaian_barang_user') }}">
       
         <div class="float-left">
           <h3>
             {{-- <span class="currency">$</span> --}}
-            <span class="count">{{ $barang_keluar->count() }}</span>
+            <span class="count">{{ $pemakaian_barang->count() }}</span>
           </h3>
           <p>Pemakaian Barang</p>
         </div>

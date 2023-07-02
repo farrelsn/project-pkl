@@ -18,7 +18,6 @@ class BarangAdminExport implements FromView, ShouldAutoSize
     {
         return view('admin.barang.export', [
             'barang' => tb_barang::all(),
-            'satuan' => tb_satuan::all(),
 
         ]);
     }

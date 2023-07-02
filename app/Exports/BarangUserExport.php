@@ -18,7 +18,6 @@ class BarangUserExport implements FromView, ShouldAutoSize
     {
         return view('user.barang.export', [
             'barang' => tb_barang::all(),
-            'satuan' => tb_satuan::all(),
 
         ]);
     }

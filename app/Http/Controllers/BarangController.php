@@ -64,7 +64,7 @@ class BarangController extends Controller
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
-            'qtydus' => 'integer|min:0',
+            'qtydus' => 'integer|min:1',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -72,11 +72,11 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
-            'harga_baru.required' => 'Harga akhir tidak boleh kosong',
-            'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
-            'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
+            'harga_baru.required' => 'Harga tidak boleh kosong',
+            'harga_baru.integer' => 'Harga harus berupa bilangan bulat',
+            'harga_baru.min' => 'Harga tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
-            'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
+            'qtydus.min' => 'Qty/Dus minimal 1',
         ]);
 
 
@@ -180,7 +180,7 @@ class BarangController extends Controller
             'kategori_barang' => 'required',
             'stok' => 'required|integer|min:0',
             'harga_baru' => 'required|integer|min:0',
-            'qtydus' => 'integer|min:0',
+            'qtydus' => 'integer|min:1',
         ], [
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah ada',
@@ -188,11 +188,11 @@ class BarangController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.integer' => 'Stok harus berupa bilangan bulat',
             'stok.min' => 'Stok tidak boleh kurang dari 0',
-            'harga_baru.required' => 'Harga akhir tidak boleh kosong',
-            'harga_baru.integer' => 'Harga akhir harus berupa bilangan bulat',
-            'harga_baru.min' => 'Harga akhir tidak boleh kurang dari 0',
+            'harga_baru.required' => 'Harga tidak boleh kosong',
+            'harga_baru.integer' => 'Harga harus berupa bilangan bulat',
+            'harga_baru.min' => 'Harga tidak boleh kurang dari 0',
             'qtydus.integer' => 'Qty/Dus harus berupa bilangan bulat',
-            'qtydus.min' => 'Qty/Dus tidak boleh kurang dari 0',
+            'qtydus.min' => 'Qty/Dus minimal 1',
         ]);
 
         // dd($request);

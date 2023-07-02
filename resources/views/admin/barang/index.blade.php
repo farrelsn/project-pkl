@@ -30,44 +30,45 @@
         <div class="card-body">
           <div class="table-responsive">
             <table id="example" class="display" style="width: 100%" cellspacing="0">
-                <thead class="text-center" style="white-space: nowrap;">
-                  <tr>
-                    <th>No.</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Kategori Barang</th>
-                    <th class="text-center">Qty/Dus</th>
-                    <th>Harga Lama</th>
-                    <th>Harga Baru</th>
-                    <th>Stok Satuan</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($barang as $item)
-                  <tr style="white-space: nowrap;">
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->kode_barang }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori->kategori_barang }}</td>
-                    <td class="text-center">{{ $item->qtydus }}</td>
-                    @if($item->harga_lama == 0)
-                    <td>-</td>
-                    @else
-                    <td>{{ $item->rupiah($item->harga_lama) }}</td>
-                    @endif
-                    @if($item->harga_baru == 0)
-                    <td>-</td>
-                    @else
-                    <td>{{ $item->rupiah($item->harga_baru) }}</td>
-                    @endif
-                    <td class="text-center">{{ $item->stok }}</td>
-                    <td class="text-center">
-                      <a class="btn btn-dark btn-sm" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <a class="btn btn-danger btn-sm" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a></td>
-                  </tr>
-                  @endforeach
-                </tbody>
+              <thead class="text-center" style="white-space: nowrap;">
+                <tr>
+                  <th>No.</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori Barang</th>
+                  <th class="text-center">Qty/Dus</th>
+                  <th>Harga Lama</th>
+                  <th>Harga Baru</th>
+                  <th>Stok Satuan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody style="white-space: nowrap;">
+                @foreach ($barang as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->kode_barang }}</td>
+                  <td>{{ $item->nama_barang }}</td>
+                  <td>{{ $item->kategori->kategori_barang }}</td>
+                  <td class="text-center">{{ $item->qtydus }}</td>
+                  @if($item->harga_lama == 0)
+                  <td>-</td>
+                  @else
+                  <td>{{ $item->rupiah($item->harga_lama) }}</td>
+                  @endif
+                  @if($item->harga_baru == 0)
+                  <td>-</td>
+                  @else
+                  <td>{{ $item->rupiah($item->harga_baru) }}</td>
+                  @endif
+                  <td class="text-center">{{ $item->stok }}</td>
+                  <td class="text-center">
+                    <a class="btn btn-dark btn-sm" href="{{ route('data_barang_admin.edit', [$item->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class="btn btn-danger btn-sm" href="{{ route('data_barang_admin.delete', [$item->id]) }}" onclick="return confirm('Apa anda yakin ingin menghapusnya?')"><i class="fa-solid fa-trash-can"></i></a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
             </table>
           </div>
         
@@ -127,15 +128,9 @@
                                   <input type="number" class="form-control" id="qtydus" name="qtydus" value="" required>
                               </div>
                             </div>
-                            {{-- <div class="form-group row">
-                              <div class="col-12">
-                                  <label for="harga_lama" class="col-form-label">Harga Awal</label>
-                                  <input type="number" class="form-control" id="harga_lama" name="harga_lama" value="" required>
-                              </div>
-                            </div> --}}
                             <div class="form-group row">
                               <div class="col-12">
-                                  <label for="harga_baru" class="col-form-label">Harga Akhir</label>
+                                  <label for="harga_baru" class="col-form-label">Harga</label>
                                   <input type="number" class="form-control" id="harga_baru" name="harga_baru" value="" required>
                               </div>
                             </div>
@@ -151,3 +146,4 @@
       </div>
       
 @endsection
+@extends('layouts.footer')
